@@ -50,9 +50,10 @@ public class LivroResource {
     }
 
     @GET
-    @Path("/search/autor/{autor}")
-    public List<LivroResponseDTO> findByAutor(@PathParam("autor") Autor autor){
-        return livroRepository.findByAutor(autor).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
+    @Path("/search/autor/{id}")
+    public List<Livro> findByAutor(@PathParam("id") Long id_autor){
+        Autor autor = autorRepository.findById(id_autor);
+        return livroRepository.findByAutor(autor);
     }
 
     @GET
@@ -66,35 +67,19 @@ public class LivroResource {
     public List<LivroResponseDTO> findByGenero(@PathParam("genero") String genero){
         return livroRepository.findByGenero(genero).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
     }
-    
-    @GET
-    @Path("/search/preco/{kk}")
-    public List<LivroResponseDTO> findByPreco(@PathParam("preco") Double preco){
-        return livroRepository.findByPreco(preco).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
-    }
-
-    @GET
-    @Path("/search/quantidadeestoque/{quantidadeestoque}")
-    public List<LivroResponseDTO> findByQuantidadeEstoque(@PathParam("quantidadeestoque") Integer quantidadeestoque){
-        return livroRepository.findByQuantidadeEstoque(quantidadeestoque).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
-    }
-
-    @GET
-    @Path("/search/isbn/{isbn}")
-    public List<LivroResponseDTO> findByIsbn(@PathParam("isbn") Integer isbn){
-        return livroRepository.findByIsbn(isbn).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
-    }
 
     @GET
     @Path("/search/datalancamento/{datalancamento}")
-    public List<LivroResponseDTO> findByDataLancamento(@PathParam("datalancamento") LocalDate datalancamento){
-        return livroRepository.findByDataLancamento(datalancamento).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
+    public List<LivroResponseDTO> findByDataLancamento(@PathParam("datalancamento") String dataLancamentoString){
+        LocalDate dataLancamento = LocalDate.parse(dataLancamentoString);
+        return livroRepository.findByDataLancamento(dataLancamento).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
     }
 
     @GET
     @Path("/search/datacadastro/{datacadastro}")
-    public List<LivroResponseDTO> findByDataCadastro(@PathParam("datacadastro") LocalDate datacadastro){
-        return livroRepository.findByDataCadastro(datacadastro).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
+    public List<LivroResponseDTO> findByDataCadastro(@PathParam("datacadastro") String dataCadastroString){
+        LocalDate dataCadastro = LocalDate.parse(dataCadastroString);
+        return livroRepository.findByDataCadastro(dataCadastro).stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
     }
 
     @GET
@@ -105,9 +90,16 @@ public class LivroResource {
 
     @POST
     @Transactional
-    public Livro create (Livro livro){
+    public LivroResponseDTO create (LivroDTO dto){
+        Livro livro = new Livro();
+        livro.setTitulo(dto.titulo());
+        livro.setAutors(autorRepository.findById(dto.id_autor()));
+        livro.setEditora(dto.editora());
+        livro.setGenero(dto.genero());
+        livro.setPreco(dto.preco());
+        livro.setQuantidadeEstoque(dto.quantidadeEstoque());
         livroRepository.persist(livro);
-        return livro;
+        return LivroResponseDTO.valueOf(livro);
     }
 
     @PUT

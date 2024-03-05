@@ -11,7 +11,7 @@ public record LivroResponseDTO (Long id,
     String genero,
     Double preco,
     Integer quantidadeEstoque,
-    Integer isbn,
+    String isbn,
     LocalDate dataLancamento,
     LocalDate dateCadastro,
     String descricao
