@@ -2,6 +2,8 @@ package br.unitins.topicos1.resource;
 
 import java.util.List;
 
+import br.unitins.topicos1.dto.AutorDTO;
+import br.unitins.topicos1.dto.AutorResponseDTO;
 import br.unitins.topicos1.model.Autor;
 import br.unitins.topicos1.repository.AutorRepository;
 import jakarta.inject.Inject;
@@ -26,32 +28,36 @@ public class AutorResource {
 
     @GET
     @Path("/{id}")
-    public Autor findById(@PathParam("id") Long id){
-        return autorRepository.findById(id);
+    public AutorResponseDTO findById(@PathParam("id") Long id){
+        return AutorResponseDTO.valueOf(autorRepository.findById(id));
     }
 
     @GET
-    public List<Autor> findAll(){
-        return autorRepository.listAll();
+    public List<AutorResponseDTO> findAll(){
+        return autorRepository.listAll().stream().map(e -> AutorResponseDTO.valueOf(e)).toList();
     }
 
     @GET
     @Path("/search/nome/{nome}")
-    public List<Autor> findByNome(@PathParam("nome") String nome){
-        return autorRepository.findByNome(nome);
+    public List<AutorResponseDTO> findByNome(@PathParam("nome") String nome){
+        return autorRepository.findByNome(nome).stream().map(e -> AutorResponseDTO.valueOf(e)).toList();
     }
 
     @GET
     @Path("/search/biografia/{biografia}")
-    public List<Autor> findByBiografia(@PathParam("biografia") String biogarfia){
-        return autorRepository.findByNome(biogarfia);
+    public List<AutorResponseDTO> findByBiografia(@PathParam("biografia") String biogarfia){
+        return autorRepository.findByNome(biogarfia).stream().map(e -> AutorResponseDTO.valueOf(e)).toList();
     }
 
     @POST
     @Transactional
-    public Autor create (Autor autor){
+    public AutorResponseDTO create (AutorDTO dto){
+        Autor autor = new Autor();
+        autor.setNome(dto.nome());
+        autor.setBiografia(dto.biografia());
+
         autorRepository.persist(autor);
-        return autor;
+        return AutorResponseDTO.valueOf(autor);
     }
 
     @PUT
