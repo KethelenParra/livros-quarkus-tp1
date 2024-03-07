@@ -3,6 +3,8 @@ package br.unitins.topicos1.repository;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
+
 import br.unitins.topicos1.model.Autor;
 import br.unitins.topicos1.model.Livro;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
@@ -15,8 +17,8 @@ public class LivroRepository implements PanacheRepository<Livro>{
         return find("UPPER(titulo) LIKE ?1", "%" + titulo.toUpperCase() + "%").list();
     }
 
-    public List<Livro> findByAutor(Autor autors){
-        return find("UPPER(autor) LIKE ?1", "%" + autors + "%").list();
+    public List<Livro> findByAutor(Autor autor){
+        return find("autor", autor ).list();
     }
 
     public List<Livro> findByEditora(String editora){
@@ -27,27 +29,23 @@ public class LivroRepository implements PanacheRepository<Livro>{
         return find("UPPER(genero) LIKE ?1", "%" + genero.toUpperCase() + "%").list();
     }
 
-    public List<Livro> findByPreco(Double preco){
-        return find("preco LIKE ?1", preco).list();
-    }
-
     public List<Livro> findByQuantidadeEstoque(Integer quantidadeEstoque){
-        return find("quantidadeEstoque LIKE ?1", quantidadeEstoque).list();
+        return find("quantidadeEstoque = LIKE ?1", quantidadeEstoque).list();
     }
 
-    public List<Livro> findByIsbn(Integer isbn){
-        return find("LIKE ?1", isbn).list();
+    public List<Livro> findByIsbn(String isbn){
+        return find("isbn", isbn).list();
     }
 
     public List<Livro> findByDataLancamento(LocalDate dataLancamento){
-        return find("dataLancamento LIKE ?1", dataLancamento).list();
+        return find("dataLancamento = LIKE ?1", dataLancamento).list();
     }
 
     public List<Livro> findByDataCadastro(LocalDate dataCadastro){
-        return find("dataCadastro LIKE ?1", dataCadastro).list();
+        return find("dataCadastro = LIKE ?1", dataCadastro).list();
     }
 
     public List<Livro> findByDescricao(String descricao){
-        return find("UPPER(genero) LIKE ?1", "%" + descricao.toUpperCase() + "%").list();
+        return find("UPPER(descricao) LIKE ?1", "%" + descricao.toUpperCase() + "%").list();
     }
 }

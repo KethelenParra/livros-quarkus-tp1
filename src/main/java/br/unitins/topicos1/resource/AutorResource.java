@@ -51,7 +51,7 @@ public class AutorResource {
 
     @POST
     @Transactional
-    public AutorResponseDTO create (AutorDTO dto){
+    public AutorResponseDTO create(AutorDTO dto){
         Autor autor = new Autor();
         autor.setNome(dto.nome());
         autor.setBiografia(dto.biografia());
@@ -63,11 +63,11 @@ public class AutorResource {
     @PUT
     @Transactional
     @Path("/{id}")
-    public void update(@PathParam("id") Long id, Autor nome, Autor biogarfia){
+    public void update(@PathParam("id") Long id, AutorDTO dto){
         Autor autorBanco = autorRepository.findById(id);
 
-        autorBanco.setNome(nome.getNome());
-        autorBanco.setBiografia(biogarfia.getBiografia());
+        autorBanco.setNome(dto.nome());
+        autorBanco.setBiografia(dto.biografia());
     }
 
     @DELETE
@@ -76,6 +76,5 @@ public class AutorResource {
     public void delete(@PathParam("id") Long id){
         autorRepository.deleteById(id);
     }
-
-    
+   
 }

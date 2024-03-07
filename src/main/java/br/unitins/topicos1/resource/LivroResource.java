@@ -1,6 +1,5 @@
 package br.unitins.topicos1.resource;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import br.unitins.topicos1.dto.LivroDTO;
@@ -40,7 +39,7 @@ public class LivroResource {
 
     @GET
     public List<LivroResponseDTO> findAll(){
-        return livroRepository.listAll().stream().map( livro -> LivroResponseDTO.valueOf(livro)).toList();
+        return livroRepository.listAll().stream().map(livro -> LivroResponseDTO.valueOf(livro)).toList();
     }
 
     @GET
@@ -81,11 +80,15 @@ public class LivroResource {
         Livro livro = new Livro();
         
         livro.setTitulo(dto.titulo());
-        livro.setAutors(autorRepository.findById(dto.id_autor()));
+        livro.setAutor(autorRepository.findById(dto.id_autor()));
         livro.setEditora(dto.editora());
         livro.setGenero(dto.genero());
         livro.setPreco(dto.preco());
         livro.setQuantidadeEstoque(dto.quantidadeEstoque());
+        livro.setIsbn(dto.isbn());
+        livro.setDataLancamento(dto.dataLancamento());
+        livro.setDataCadastro(dto.dataCadastro());
+        livro.setDescricao(dto.descricao());
 
         livroRepository.persist(livro);
         return LivroResponseDTO.valueOf(livro);
@@ -98,7 +101,7 @@ public class LivroResource {
         Livro livro = livroRepository.findById(id);
 
         livro.setTitulo(dto.titulo());
-        livro.setAutors(autorRepository.findById(dto.id_autor()));
+        livro.setAutor(autorRepository.findById(dto.id_autor()));
         livro.setEditora(dto.editora());
         livro.setGenero(dto.genero());
         livro.setPreco(dto.preco());

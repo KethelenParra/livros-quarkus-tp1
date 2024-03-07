@@ -13,21 +13,21 @@ public record LivroResponseDTO (Long id,
     Integer quantidadeEstoque,
     String isbn,
     LocalDate dataLancamento,
-    LocalDate dateCadastro,
+    LocalDate dataCadastro,
     String descricao
 ) {
     public static LivroResponseDTO valueOf(Livro livro){
         return new LivroResponseDTO(
             livro.getId(),
             livro.getTitulo(),
-            AutorResponseDTO.valueOf(livro.getAutors()),
+            AutorResponseDTO.valueOf(livro.getAutor()),
             livro.getEditora(),
             livro.getGenero(),
             livro.getPreco(),
             livro.getQuantidadeEstoque(),
             livro.getIsbn(),
             livro.getDataLancamento(),
-            livro.getDateCadastro(),
+            livro.getDataCadastro(),
             livro.getDescricao());
     }
     

@@ -8,9 +8,9 @@ public record LivroDTO( String titulo,
                         String genero,
                         Double preco,
                         Integer quantidadeEstoque,
-                        Integer isbn,
+                        String isbn,
                         LocalDate dataLancamento,
-                        LocalDate dateCadastro,
+                        LocalDate dataCadastro,
                         String descricao
                       ) {}
    

@@ -22,7 +22,7 @@ public class Livro {
 
     @ManyToOne
     @JoinColumn(name = "id_autor")
-    private Autor autors;
+    private Autor autor;
 
     @Column(length = 60, nullable = false)
     private String editora;
@@ -36,14 +36,14 @@ public class Livro {
     @Column(nullable = false)
     private Integer quantidadeEstoque;
 
-    @Column(nullable = false)
+    @Column(length = 20, nullable = false)
     private String isbn;
 
     @Column(nullable = false)
     private LocalDate dataLancamento;
 
     @Column(nullable = false)
-    private LocalDate dateCadastro;
+    private LocalDate dataCadastro;
 
     @Column(length = 10000, nullable = false)
     private String descricao;
@@ -64,12 +64,12 @@ public class Livro {
         this.titulo = titulo;
     }
 
-    public Autor getAutors() {
-        return autors;
+    public Autor getAutor() {
+        return autor;
     }
 
-    public void setAutors(Autor autors) {
-        this.autors = autors;
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 
     public String getEditora() {
@@ -120,12 +120,12 @@ public class Livro {
         this.dataLancamento = dataLancamento;
     }
 
-    public LocalDate getDateCadastro() {
-        return dateCadastro;
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setDateCadastro(LocalDate dateCadastro) {
-        this.dateCadastro = dateCadastro;
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public String getDescricao() {
