@@ -3,8 +3,6 @@ package br.unitins.topicos1.repository;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
-
 import br.unitins.topicos1.model.Autor;
 import br.unitins.topicos1.model.Livro;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
