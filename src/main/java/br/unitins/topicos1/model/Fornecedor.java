@@ -1,0 +1,98 @@
+package br.unitins.topicos1.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+@Entity
+public class Fornecedor extends DefaultEntity {
+
+    @Column(length = 60, nullable = false)
+    private String nome;
+
+    @Column(length = 18, nullable = false)
+    private String cnpj;
+
+    @Column(length = 12)
+    private String inscricaoEstadual;
+
+    private String email;
+
+    @Column(length = 60, nullable = false)
+    private String endereco;
+
+    @Column(length = 10, nullable = false)
+    private String cep;
+
+    private String estado;
+    private String cidade;
+
+    @OneToOne
+    @JoinColumn(name = "id_telefone", unique = true)
+    private Telefone telefone;
+
+    private Integer quantLivrosFornecido;
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public String getCnpj() {
+        return cnpj;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    public String getInscricaoEstadual() {
+        return inscricaoEstadual;
+    }
+    public void setInscricaoEstadual(String inscricaoEstadual) {
+        this.inscricaoEstadual = inscricaoEstadual;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+    public String getCep() {
+        return cep;
+    }
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getCidade() {
+        return cidade;
+    }
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+    public Integer getQuantLivrosFornecido() {
+        return quantLivrosFornecido;
+    }
+    public void setQuantLivrosFornecido(Integer quantLivrosFornecido) {
+        this.quantLivrosFornecido = quantLivrosFornecido;
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    } 
+}
