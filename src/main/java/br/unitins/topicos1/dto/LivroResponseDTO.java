@@ -15,7 +15,7 @@ public record LivroResponseDTO (
                         Double preco,
                         Integer quantidadeEstoque,
                         String isbn,
-                        LocalDate dataLancamento,
+                        LocalDate datalancamento,
                         Classificacao id_classificacao,
                         String descricao,
                         FornecedorResponseDTO fornecedor
@@ -38,7 +38,7 @@ public record LivroResponseDTO (
             livro.getPreco(),
             livro.getQuantidadeEstoque(),
             livro.getIsbn(),
-            livro.getDataLancamento(),
+            livro.getDatalancamento(),
             livro.getClassificacao(),
             livro.getDescricao(),
             FornecedorResponseDTO.valueOf(livro.getFornecedor())

@@ -42,6 +42,12 @@ public class LivroResource {
     }
 
     @GET
+    @Path("/search/isbn/{isbn}")
+    public Response findByIsbn(@PathParam("isbn") String isbn){
+        return Response.ok(livroService.findByIsbn(isbn)).build();
+    }
+
+    @GET
     @Path("/search/descricao/{descricao}")
     public Response findByDescricao(@PathParam("descricao") String descricao){
         return Response.ok(livroService.findByDescricao(descricao)).build();

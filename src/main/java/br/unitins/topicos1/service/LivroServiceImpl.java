@@ -1,18 +1,14 @@
 package br.unitins.topicos1.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.unitins.topicos1.dto.EditoraDTO;
 import br.unitins.topicos1.dto.LivroDTO;
 import br.unitins.topicos1.dto.LivroResponseDTO;
-import br.unitins.topicos1.model.Autor;
 import br.unitins.topicos1.model.Classificacao;
-import br.unitins.topicos1.model.Editora;
-import br.unitins.topicos1.model.Fornecedor;
 import br.unitins.topicos1.model.Livro;
 import br.unitins.topicos1.repository.AutorRepository;
 import br.unitins.topicos1.repository.EditoraRepository;
+import br.unitins.topicos1.repository.FornecedorRepository;
 import br.unitins.topicos1.repository.GeneroRepository;
 import br.unitins.topicos1.repository.LivroRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -35,6 +31,9 @@ public class LivroServiceImpl implements LivroService{
     @Inject
     public GeneroRepository generoRepository;
 
+    @Inject
+    public FornecedorRepository fornecedorRepository;
+
     @Override
     @Transactional
     public LivroResponseDTO create(@Valid LivroDTO dto){
@@ -43,11 +42,13 @@ public class LivroServiceImpl implements LivroService{
         livro.setQuantidadeEstoque(dto.quantidadeEstoque());
         livro.setIsbn(dto.isbn());
         livro.setDescricao(dto.descricao());
+        livro.setDatalancamento(dto.datalancamento());
+        livro.setPreco(dto.preco());
         livro.setClassificacao(Classificacao.valueOf(dto.id_classificacao()));
+        livro.setFornecedor(fornecedorRepository.findById(dto.fornecedor()));
         livro.setListaAutor((dto.autores()).stream().map(a -> autorRepository.findById(a)).toList());
         livro.setListaGenero(dto.generos().stream().map(g -> generoRepository.findById(g)).toList());
         livro.setEditora(editoraRepository.findById(dto.editora()));
-
 
         livroRepository.persist(livro);
         return LivroResponseDTO.valueOf(livro);
@@ -62,7 +63,10 @@ public class LivroServiceImpl implements LivroService{
         livroBanco.setQuantidadeEstoque(dto.quantidadeEstoque());
         livroBanco.setIsbn(dto.isbn());
         livroBanco.setDescricao(dto.descricao());
+        livroBanco.setDatalancamento(dto.datalancamento());
+        livroBanco.setFornecedor(fornecedorRepository.findById(dto.fornecedor()));
         livroBanco.setClassificacao(Classificacao.valueOf(dto.id_classificacao()));
+        livroBanco.setPreco(dto.preco());
         livroBanco.setListaAutor((dto.autores()).stream().map(a -> autorRepository.findById(a)).toList());
         livroBanco.setListaGenero(dto.generos().stream().map(g -> generoRepository.findById(g)).toList());
         livroBanco.setEditora(editoraRepository.findById(dto.editora()));

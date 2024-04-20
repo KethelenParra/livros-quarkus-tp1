@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToMany;
 public class Genero extends DefaultEntity{
     
     @Column(length = 60, nullable = false)
-    private String name;
+    private String nome;
 
     @Column(length = 500, nullable = false)
     private String descricao;
@@ -18,13 +18,6 @@ public class Genero extends DefaultEntity{
     @ManyToMany(mappedBy = "listaGenero")
     private List<Livro> listaLivros;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDescricao() {
         return descricao;
@@ -40,6 +33,14 @@ public class Genero extends DefaultEntity{
 
     public void setListaLivros(List<Livro> listaLivros) {
         this.listaLivros = listaLivros;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
 }

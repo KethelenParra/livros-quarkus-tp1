@@ -1,5 +1,6 @@
 package br.unitins.topicos1.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -28,11 +29,11 @@ public class Fornecedor extends DefaultEntity {
     private String estado;
     private String cidade;
 
-    @OneToOne
-    @JoinColumn(name = "id_telefone", unique = true)
-    private Telefone telefone;
-
     private Integer quantLivrosFornecido;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_telefone", nullable = false)
+    private Telefone telefone;
 
     public String getNome() {
         return nome;

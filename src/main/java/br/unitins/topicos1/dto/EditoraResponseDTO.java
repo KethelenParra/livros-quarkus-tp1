@@ -4,7 +4,7 @@ import br.unitins.topicos1.model.Editora;
 
 public record EditoraResponseDTO(
     Long id,  
-    String name, 
+    String nome, 
     String email, 
     String endereco, 
     String estado, 
@@ -13,7 +13,7 @@ public record EditoraResponseDTO(
     public static EditoraResponseDTO valueOf(Editora editora){
         return new EditoraResponseDTO(
             editora.getId(),
-            editora.getName(),
+            editora.getNome(),
             editora.getEmail(),
             editora.getEndereco(),
             editora.getEstado(),

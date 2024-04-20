@@ -29,12 +29,20 @@ public class Livro extends DefaultEntity{
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private LocalDate dataLancamento;
+    private LocalDate datalancamento;
 
     @Column(length = 5000, nullable = false)
     private String descricao;
 
     private Classificacao classificacao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_fornecedor", nullable = false)
+    private Fornecedor fornecedor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_editora", nullable = false)
+    private Editora Editora;
 
     @ManyToMany
     @JoinTable(
@@ -51,16 +59,6 @@ public class Livro extends DefaultEntity{
         inverseJoinColumns = @JoinColumn(name = "idgenero")
     )
     private List<Genero> listaGenero;
-
-
-    @ManyToOne
-    @JoinColumn(name = "id_fornecedor", nullable = false)
-    private Fornecedor Fornecedor;
-
-    @ManyToOne
-    @JoinColumn(name = "id_editora", nullable = false)
-    private Editora Editora;
-
 
     public String getTitulo() {
         return titulo;
@@ -101,13 +99,13 @@ public class Livro extends DefaultEntity{
     }
 
 
-    public LocalDate getDataLancamento() {
-        return dataLancamento;
+    public LocalDate getDatalancamento() {
+        return datalancamento;
     }
 
 
-    public void setDataLancamento(LocalDate dataLancamento) {
-        this.dataLancamento = dataLancamento;
+    public void setDatalancamento(LocalDate datalancamento) {
+        this.datalancamento = datalancamento;
     }
 
 
@@ -149,17 +147,6 @@ public class Livro extends DefaultEntity{
         this.listaGenero = listaGenero;
     }
 
-
-    public Fornecedor getFornecedor() {
-        return Fornecedor;
-    }
-
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        Fornecedor = fornecedor;
-    }
-
-
     public Editora getEditora() {
         return Editora;
     }
@@ -167,6 +154,16 @@ public class Livro extends DefaultEntity{
 
     public void setEditora(Editora editora) {
         Editora = editora;
+    }
+
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
 }

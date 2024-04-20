@@ -14,22 +14,6 @@ public class ClassificacaoConverter implements AttributeConverter<Classificacao,
 
     @Override
     public Classificacao convertToEntityAttribute(Integer id) {
-        switch (id) {
-            case 1:
-                return Classificacao.LIVRE;
-            case 2:
-                return Classificacao.DEZANOS;
-            case 3:
-                return Classificacao.DOZEANOS;
-            case 4:
-                return Classificacao.QUATORZEANOS;
-            case 5:
-                return Classificacao.DEZESSEISANOS;
-            case 6:
-                return Classificacao.DEZOITOANOS;
-            default:
-                throw new IllegalArgumentException("id classificacao inválido: " + id);
-        }
+        return Classificacao.valueOf(id);
     }
-   
 }

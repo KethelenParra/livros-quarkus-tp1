@@ -11,6 +11,7 @@ public enum Classificacao {
     QUATORZEANOS(4, "14 Anos"),
     DEZESSEISANOS(5, "16 Anos"),
     DEZOITOANOS(6, "18 Anos");
+    
     private int id;
     private String descricao;
 

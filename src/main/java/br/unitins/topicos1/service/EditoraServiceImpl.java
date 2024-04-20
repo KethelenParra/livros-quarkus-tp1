@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.topicos1.dto.EditoraDTO;
 import br.unitins.topicos1.dto.EditoraResponseDTO;
+import br.unitins.topicos1.dto.TelefoneDTO;
 import br.unitins.topicos1.model.Editora;
 import br.unitins.topicos1.model.Telefone;
 import br.unitins.topicos1.repository.EditoraRepository;
@@ -22,17 +23,20 @@ public class EditoraServiceImpl implements EditoraService {
     @Transactional
     public EditoraResponseDTO create(@Valid EditoraDTO dto) {
         Editora editora = new Editora();
-        editora.setName(dto.name());
+        editora.setNome(dto.nome());
         editora.setEmail(dto.email());
         editora.setEndereco(dto.endereco());
         editora.setEndereco(dto.endereco());
         editora.setEstado(dto.estado());
 
-        Telefone telefone = new Telefone();
-        telefone.setCodigoArea(dto.telefone().codigoArea());
-        telefone.setNumero(dto.telefone().numero());
-        editora.setTelefone(telefone);
-
+        TelefoneDTO telefoneDTO = dto.telefone(); // Armazena o DTO do telefone
+        if (telefoneDTO != null) { // Verifica se o DTO do telefone não é nulo
+            Telefone telefone = new Telefone();
+            telefone.setCodigoArea(telefoneDTO.codigoArea());
+            telefone.setNumero(telefoneDTO.numero());
+            editora.setTelefone(telefone);
+        }
+        
         editoraRepository.persist(editora);
         return EditoraResponseDTO.valueOf(editora);
     }
@@ -42,7 +46,7 @@ public class EditoraServiceImpl implements EditoraService {
     public void update(Long id, EditoraDTO dto) {
         Editora editoraBanco = editoraRepository.findById(id);
 
-        editoraBanco.setName(dto.name());
+        editoraBanco.setNome(dto.nome());
         editoraBanco.setEmail(dto.email());
         editoraBanco.setEndereco(dto.endereco());
         editoraBanco.setEndereco(dto.endereco());

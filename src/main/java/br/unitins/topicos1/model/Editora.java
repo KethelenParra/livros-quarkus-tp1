@@ -1,5 +1,6 @@
 package br.unitins.topicos1.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -11,26 +12,26 @@ import jakarta.validation.constraints.NotEmpty;
 public class Editora extends DefaultEntity{
     
     @Column(length = 60, nullable = false)
-    private String name;
+    private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     @Email(message= "E-mail inválido.")
 	@NotEmpty(message = "O E-mail deve ser informado.")
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_telefone", unique = true)
     private Telefone telefone;
     
     private String endereco;
     private String estado;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;

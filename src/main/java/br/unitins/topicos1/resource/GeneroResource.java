@@ -37,7 +37,7 @@ public class GeneroResource {
 
     @GET
     @Path("/search/nome/{nome}")
-    public Response findByTitulo(@PathParam("nome") String nome){
+    public Response findByNome(@PathParam("nome") String nome){
         return Response.ok(generoService.findByNome(nome)).build();
     }
 

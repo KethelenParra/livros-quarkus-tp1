@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.topicos1.dto.FornecedorDTO;
 import br.unitins.topicos1.dto.FornecedorResponseDTO;
+import br.unitins.topicos1.dto.TelefoneDTO;
 import br.unitins.topicos1.model.Fornecedor;
 import br.unitins.topicos1.model.Telefone;
 import br.unitins.topicos1.repository.FornecedorRepository;
@@ -32,10 +33,13 @@ public class FornecedorServiceImpl implements FornecedorService {
         fornecedor.setCidade(dto.cidade());
         fornecedor.setQuantLivrosFornecido(dto.quantLivrosFornecido());
 
-        Telefone telefone = new Telefone();
-        telefone.setCodigoArea(dto.telefone().codigoArea());
-        telefone.setNumero(dto.telefone().numero());
-        fornecedor.setTelefone(telefone);
+        TelefoneDTO telefoneDTO = dto.telefone(); // Armazena o DTO do telefone
+        if (telefoneDTO != null) { // Verifica se o DTO do telefone não é nulo
+            Telefone telefone = new Telefone();
+            telefone.setCodigoArea(telefoneDTO.codigoArea());
+            telefone.setNumero(telefoneDTO.numero());
+            fornecedor.setTelefone(telefone);
+        }
 
         fornecedorRepository.persist(fornecedor);
         return FornecedorResponseDTO.valueOf(fornecedor);

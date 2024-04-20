@@ -10,7 +10,7 @@ public record LivroDTO( String titulo,
                         Double preco,
                         Integer quantidadeEstoque,
                         String isbn,
-                        LocalDate dataLancamento,
+                        LocalDate datalancamento,
                         Integer id_classificacao,
                         String descricao,
                         Long fornecedor

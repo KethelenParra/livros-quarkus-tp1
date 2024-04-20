@@ -21,7 +21,7 @@ public class GeneroServiceImpl implements GeneroService{
     @Transactional
     public GeneroResponseDTO create(@Valid GeneroDTO dto){
         Genero genero = new Genero();
-        genero.setName(dto.name());
+        genero.setNome(dto.nome());
         genero.setDescricao(dto.Descricao());
       
 
@@ -34,7 +34,7 @@ public class GeneroServiceImpl implements GeneroService{
     public void update(Long id, GeneroDTO dto){
         Genero generoBanco = generoRepository.findById(id);
 
-        generoBanco.setName(dto.name());
+        generoBanco.setNome(dto.nome());
         generoBanco.setDescricao(dto.Descricao());
     }
 
