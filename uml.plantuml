@@ -1,0 +1,105 @@
+@startuml
+
+class Usuario {
+  id : Long
+  usuario : String
+  senha : String
+  nomeCompleto : String
+  email : String
+  sexo : Sexo
+  cpf : String
+  cep : String
+  endereco : String
+  estado : String
+  cidade : String
+  
+}
+
+class Cliente{
+  - id : Long 
+}
+
+
+class Funcionario {
+ - id : Long
+}
+
+enum Sexo{
+ - FEMININO : Integer
+ - MASCULINO : Integer
+}
+
+class Livro {
+ - id : Long
+ - titulo : String
+ - editora : String
+ - preco : Double
+ - quantEstoque : Integer
+ - isbn : String
+ - dataLancamento : LocalDate
+ - dataCadastro : LocalDate
+ - descricao : String
+}
+
+class Genero{
+ - id : Long
+ - nome : String
+ - descricao : String
+}
+
+class Autor{
+ - id : Long
+ - nome : String
+ - biografia : String
+ - obrasPublicadas : Livros
+ - redeSocias : String
+}
+
+class Fornecedor{
+ - id : Long
+ - nome : String
+ - cnpj : String
+ - inscricaoEstadual : String
+ - email : String
+ - endereco : String
+ - cep : String
+ - cidade : String
+ - estado : String
+}
+
+enum Classificacao{
+  - LIVRE : Integer 
+  - DEZANOS : Integer
+  - DOZEANOS : Integer
+  - QUATORZEANOS : Integer
+  - DEZESSEISANOS : Integer
+  - DEZOITOANOS : Integer
+}
+
+class Editora {
+ - nome : String
+ - endereco : String
+ - estado : String
+ - email : String
+}
+
+class Telefone{
+ - codigoArea : String
+ - numero : String
+}
+
+Usuario "1" <-- "1" Cliente
+Usuario "1" <-- "1" Funcionario
+Usuario "*" -- "1" Sexo
+Usuario "1" *--> "1" Telefone
+
+Livro "*" o--> "*" Genero
+Livro "*" --> "*" Autor
+Livro "*" --> "1" Fornecedor 
+Livro "*" --> "1" Editora
+Livro "*" --> "1" Classificacao
+
+Editora "1" *--> "1" Telefone
+Fornecedor "1" *--> "1" Telefone
+
+@enduml
