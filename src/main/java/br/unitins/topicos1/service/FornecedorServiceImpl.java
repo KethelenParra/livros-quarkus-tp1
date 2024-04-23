@@ -8,6 +8,7 @@ import br.unitins.topicos1.dto.TelefoneDTO;
 import br.unitins.topicos1.model.Fornecedor;
 import br.unitins.topicos1.model.Telefone;
 import br.unitins.topicos1.repository.FornecedorRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -22,6 +23,8 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Override
     @Transactional
     public FornecedorResponseDTO create(@Valid FornecedorDTO dto) {
+        validarNomeFornecedor(dto.nome());
+
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNome(dto.nome());
         fornecedor.setCnpj(dto.cnpj());
@@ -43,6 +46,11 @@ public class FornecedorServiceImpl implements FornecedorService {
 
         fornecedorRepository.persist(fornecedor);
         return FornecedorResponseDTO.valueOf(fornecedor);
+    }
+    public void validarNomeFornecedor(String nome) {
+        Fornecedor fornecedor = fornecedorRepository.findByNomeFornecedor(nome);
+        if (fornecedor != null)
+            throw  new ValidationException("nome", "O fornecedor '"+nome+"' já existe.");
     }
 
     @Override
@@ -88,11 +96,6 @@ public class FornecedorServiceImpl implements FornecedorService {
     }
 
     @Override
-    public List<FornecedorResponseDTO> findByCnpj(String cnpj) {
-        return fornecedorRepository.findByCnpj(cnpj).stream().map(fornecedores -> FornecedorResponseDTO.valueOf(fornecedores)).toList();
-    }
-
-    @Override
     public List<FornecedorResponseDTO> findByCidade(String cidade) {
         return fornecedorRepository.findByCidade(cidade).stream().map(fornecedores -> FornecedorResponseDTO.valueOf(fornecedores)).toList();
     }
@@ -102,8 +105,4 @@ public class FornecedorServiceImpl implements FornecedorService {
         return fornecedorRepository.findByEstado(estado).stream().map(fornecedores -> FornecedorResponseDTO.valueOf(fornecedores)).toList();
     }
     
-    @Override
-    public List<FornecedorResponseDTO> findByQuantLivrosFornecido(Integer quantLivrosFornecido) {
-        return fornecedorRepository.findByQuantLivrosFornecido(quantLivrosFornecido).stream().map(fornecedores -> FornecedorResponseDTO.valueOf(fornecedores)).toList();
-    }
 }

@@ -17,4 +17,8 @@ public class EditoraRepository implements PanacheRepository<Editora>{
         return find("UPPER(estado) LIKE ?1", "%" + estado.toUpperCase() + "%").list();
     }
 
+    public Editora findByNomeEditora(String nome) {
+        return find("UPPER(nome) = ?1",  nome.toUpperCase() ).firstResult();
+    }
+
 }

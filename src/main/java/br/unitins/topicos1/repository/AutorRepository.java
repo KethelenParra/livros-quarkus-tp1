@@ -16,4 +16,8 @@ public class AutorRepository implements PanacheRepository<Autor>{
     public List<Autor> findByBiografia(String biografia){
         return find("UPPER(biografia) LIKE ?1", "%"+ biografia.toUpperCase() +"%").list();
     }
+
+    public Autor findByNomeCompleto(String nome) {
+        return find("UPPER(nome) = ?1",  nome.toUpperCase() ).firstResult();
+    }
 }

@@ -8,6 +8,7 @@ import br.unitins.topicos1.dto.TelefoneDTO;
 import br.unitins.topicos1.model.Editora;
 import br.unitins.topicos1.model.Telefone;
 import br.unitins.topicos1.repository.EditoraRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -22,10 +23,11 @@ public class EditoraServiceImpl implements EditoraService {
     @Override
     @Transactional
     public EditoraResponseDTO create(@Valid EditoraDTO dto) {
+        validarNomeEditora(dto.nome());
+
         Editora editora = new Editora();
         editora.setNome(dto.nome());
         editora.setEmail(dto.email());
-        editora.setEndereco(dto.endereco());
         editora.setEndereco(dto.endereco());
         editora.setEstado(dto.estado());
 
@@ -41,6 +43,12 @@ public class EditoraServiceImpl implements EditoraService {
         return EditoraResponseDTO.valueOf(editora);
     }
 
+    public void validarNomeEditora(String nome) {
+        Editora editora = editoraRepository.findByNomeEditora(nome);
+        if (editora != null)
+            throw  new ValidationException("nome", "O editora '"+nome+"' já existe.");
+    }
+
     @Override
     @Transactional
     public void update(Long id, EditoraDTO dto) {
@@ -48,7 +56,6 @@ public class EditoraServiceImpl implements EditoraService {
 
         editoraBanco.setNome(dto.nome());
         editoraBanco.setEmail(dto.email());
-        editoraBanco.setEndereco(dto.endereco());
         editoraBanco.setEndereco(dto.endereco());
         editoraBanco.setEstado(dto.estado());
 

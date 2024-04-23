@@ -6,6 +6,7 @@ import br.unitins.topicos1.dto.AutorDTO;
 import br.unitins.topicos1.dto.AutorResponseDTO;
 import br.unitins.topicos1.model.Autor;
 import br.unitins.topicos1.repository.AutorRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,12 +21,20 @@ public class AutorServiceImpl implements AutorService{
     @Override
     @Transactional
     public AutorResponseDTO create(@Valid AutorDTO dto){
+        validarNomeCompletoAutor(dto.nome());
+
         Autor autor = new Autor();
         autor.setNome(dto.nome());
         autor.setBiografia(dto.biografia());
 
         autorRepository.persist(autor);
         return AutorResponseDTO.valueOf(autor);
+    }
+
+    public void validarNomeCompletoAutor(String nome) {
+        Autor autor = autorRepository.findByNomeCompleto(nome);
+        if (autor != null)
+            throw  new ValidationException("nome", "O nome '"+nome+"' já existe.");
     }
 
     @Override

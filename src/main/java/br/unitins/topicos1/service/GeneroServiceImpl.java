@@ -6,6 +6,7 @@ import br.unitins.topicos1.dto.GeneroDTO;
 import br.unitins.topicos1.dto.GeneroResponseDTO;
 import br.unitins.topicos1.model.Genero;
 import br.unitins.topicos1.repository.GeneroRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,6 +21,8 @@ public class GeneroServiceImpl implements GeneroService{
     @Override
     @Transactional
     public GeneroResponseDTO create(@Valid GeneroDTO dto){
+        validarNomeGenero(dto.nome());
+
         Genero genero = new Genero();
         genero.setNome(dto.nome());
         genero.setDescricao(dto.Descricao());
@@ -27,6 +30,12 @@ public class GeneroServiceImpl implements GeneroService{
 
         generoRepository.persist(genero);
         return GeneroResponseDTO.valueOf(genero);
+    }
+
+    public void validarNomeGenero(String nome) {
+        Genero genero = generoRepository.findByNomeGenero(nome);
+        if (genero != null)
+            throw  new ValidationException("nome", "O Genero '"+nome+"' já existe.");
     }
 
     @Override

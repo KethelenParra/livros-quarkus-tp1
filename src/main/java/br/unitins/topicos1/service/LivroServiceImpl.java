@@ -11,6 +11,7 @@ import br.unitins.topicos1.repository.EditoraRepository;
 import br.unitins.topicos1.repository.FornecedorRepository;
 import br.unitins.topicos1.repository.GeneroRepository;
 import br.unitins.topicos1.repository.LivroRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -52,6 +53,12 @@ public class LivroServiceImpl implements LivroService{
 
         livroRepository.persist(livro);
         return LivroResponseDTO.valueOf(livro);
+    }
+    
+    public void validarTituloLivro(String nome) {
+        Livro livro = livroRepository.findByTituloLivro(nome);
+        if (livro != null)
+            throw  new ValidationException("nome", "O nome '"+nome+"' já existe.");
     }
 
     @Override

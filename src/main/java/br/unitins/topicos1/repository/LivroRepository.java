@@ -25,4 +25,8 @@ public class LivroRepository implements PanacheRepository<Livro>{
         return find("UPPER(descricao) LIKE ?1", "%" + descricao.toUpperCase() + "%").list();
     }
 
+    public Livro findByTituloLivro(String nome) {
+        return find("UPPER(nome) = ?1",  nome.toUpperCase() ).firstResult();
+    }
+
 }

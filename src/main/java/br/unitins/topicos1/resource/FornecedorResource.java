@@ -42,12 +42,6 @@ public class FornecedorResource {
     }
 
     @GET
-    @Path("/search/cnpj/{cnpj}")
-    public Response findByCnpj(@PathParam("cnpj") String cnpj){
-        return Response.ok(fornecedorService.findByCnpj(cnpj)).build();
-    }
-
-    @GET
     @Path("/search/estado/{estado}")
     public Response findByEstado(@PathParam("estado") String estado){
         return Response.ok(fornecedorService.findByEstado(estado)).build();
@@ -57,12 +51,6 @@ public class FornecedorResource {
     @Path("/search/cidade/{cidade}")
     public Response findByCidade(@PathParam("cidade") String cidade){
         return Response.ok(fornecedorService.findByCidade(cidade)).build();
-    }
-
-    @GET
-    @Path("/search/quantlivrosfornecido/{quantlivrosfornecido}")
-    public Response findByQuantLivrosFornecido(@PathParam("quantlivrosfornecido") Integer quantlivrosfornecido){
-        return Response.ok(fornecedorService.findByQuantLivrosFornecido(quantlivrosfornecido)).build();
     }
 
     @POST

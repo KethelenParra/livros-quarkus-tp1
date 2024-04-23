@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
 
 @Entity
 public class Fornecedor extends DefaultEntity {
@@ -18,6 +19,7 @@ public class Fornecedor extends DefaultEntity {
     @Column(length = 12)
     private String inscricaoEstadual;
 
+    @Email(message= "E-mail inválido.")
     private String email;
 
     @Column(length = 60, nullable = false)
