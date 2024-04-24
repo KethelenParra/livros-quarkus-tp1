@@ -30,15 +30,8 @@ public class EditoraServiceImpl implements EditoraService {
         editora.setEmail(dto.email());
         editora.setEndereco(dto.endereco());
         editora.setEstado(dto.estado());
-
-        TelefoneDTO telefoneDTO = dto.telefone(); // Armazena o DTO do telefone
-        if (telefoneDTO != null) { // Verifica se o DTO do telefone não é nulo
-            Telefone telefone = new Telefone();
-            telefone.setCodigoArea(telefoneDTO.codigoArea());
-            telefone.setNumero(telefoneDTO.numero());
-            editora.setTelefone(telefone);
-        }
-        
+        editora.setTelefone(TelefoneDTO.convertToTelefone(dto.telefone()));
+ 
         editoraRepository.persist(editora);
         return EditoraResponseDTO.valueOf(editora);
     }
@@ -59,10 +52,10 @@ public class EditoraServiceImpl implements EditoraService {
         editoraBanco.setEndereco(dto.endereco());
         editoraBanco.setEstado(dto.estado());
 
-        Telefone telefone = new Telefone();
+        Telefone telefone = editoraBanco.getTelefone();
         telefone.setCodigoArea(dto.telefone().codigoArea());
         telefone.setNumero(dto.telefone().numero());
-        editoraBanco.setTelefone(telefone);
+
     }
 
     @Override

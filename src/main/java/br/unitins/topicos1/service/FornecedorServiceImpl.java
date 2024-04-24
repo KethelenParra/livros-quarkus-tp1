@@ -35,14 +35,7 @@ public class FornecedorServiceImpl implements FornecedorService {
         fornecedor.setEstado(dto.estado());
         fornecedor.setCidade(dto.cidade());
         fornecedor.setQuantLivrosFornecido(dto.quantLivrosFornecido());
-
-        TelefoneDTO telefoneDTO = dto.telefone(); // Armazena o DTO do telefone
-        if (telefoneDTO != null) { // Verifica se o DTO do telefone não é nulo
-            Telefone telefone = new Telefone();
-            telefone.setCodigoArea(telefoneDTO.codigoArea());
-            telefone.setNumero(telefoneDTO.numero());
-            fornecedor.setTelefone(telefone);
-        }
+        fornecedor.setTelefone(TelefoneDTO.convertToTelefone(dto.telefone()));
 
         fornecedorRepository.persist(fornecedor);
         return FornecedorResponseDTO.valueOf(fornecedor);
@@ -68,10 +61,9 @@ public class FornecedorServiceImpl implements FornecedorService {
         fornecedorBanco.setCidade(dto.cidade());
         fornecedorBanco.setQuantLivrosFornecido(dto.quantLivrosFornecido());
 
-        Telefone telefone = new Telefone();
+        Telefone telefone = fornecedorBanco.getTelefone();
         telefone.setCodigoArea(dto.telefone().codigoArea());
         telefone.setNumero(dto.telefone().numero());
-        fornecedorBanco.setTelefone(telefone);
     }
 
     @Override
