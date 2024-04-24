@@ -47,15 +47,16 @@ public class EditoraServiceImpl implements EditoraService {
     public void update(Long id, EditoraDTO dto) {
         Editora editoraBanco = editoraRepository.findById(id);
 
-        editoraBanco.setNome(dto.nome());
-        editoraBanco.setEmail(dto.email());
-        editoraBanco.setEndereco(dto.endereco());
-        editoraBanco.setEstado(dto.estado());
+        if(editoraBanco != null ){
+            editoraBanco.setNome(dto.nome());
+            editoraBanco.setEmail(dto.email());
+            editoraBanco.setEndereco(dto.endereco());
+            editoraBanco.setEstado(dto.estado());
 
-        Telefone telefone = editoraBanco.getTelefone();
-        telefone.setCodigoArea(dto.telefone().codigoArea());
-        telefone.setNumero(dto.telefone().numero());
-
+            Telefone telefone = editoraBanco.getTelefone();
+            telefone.setCodigoArea(dto.telefone().codigoArea());
+            telefone.setNumero(dto.telefone().numero());
+        }
     }
 
     @Override
