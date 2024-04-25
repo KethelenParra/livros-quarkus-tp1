@@ -4,7 +4,7 @@ import br.unitins.topicos1.model.Genero;
 
 public record GeneroResponseDTO(
     Long id,  
-    String name, 
+    String nome, 
     String descricao
 ) {
     public static GeneroResponseDTO valueOf(Genero genero){
