@@ -102,12 +102,6 @@ public class LivroServiceImpl implements LivroService{
     }
 
     @Override
-    public List<LivroResponseDTO> findByQuantidadeEstoque(Integer quantidadeEstoque) {
-        return livroRepository.findByQuantidadeEstoque(quantidadeEstoque).stream()
-        .map(e -> LivroResponseDTO.valueOf(e)).toList();
-    }
-
-    @Override
     public List<LivroResponseDTO> findByIsbn(String isbn) {
         return livroRepository.findByIsbn(isbn).stream()
         .map(e -> LivroResponseDTO.valueOf(e)).toList();

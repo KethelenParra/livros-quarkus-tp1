@@ -13,12 +13,8 @@ public class LivroRepository implements PanacheRepository<Livro>{
         return find("UPPER(titulo) LIKE ?1", "%" + titulo.toUpperCase() + "%").list();
     }
 
-    public List<Livro> findByQuantidadeEstoque(Integer quantidadeEstoque){
-        return find("quantidadeEstoque = LIKE ?1", quantidadeEstoque).list();
-    }
-
     public List<Livro> findByIsbn(String isbn){
-        return find("isbn", isbn).list();
+        return find("isbn LIKE ?1", "%" + isbn + "%").list();
     }
 
     public List<Livro> findByDescricao(String descricao){

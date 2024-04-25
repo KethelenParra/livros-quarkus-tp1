@@ -14,7 +14,6 @@ public interface LivroService {
     public LivroResponseDTO findById(Long id);
     public List<LivroResponseDTO> findAll();
     public List<LivroResponseDTO> findByTitulo(String titulo);
-    public List<LivroResponseDTO> findByQuantidadeEstoque(Integer quantidadeEstoque);
     public List<LivroResponseDTO> findByIsbn(String isbn);
     public List<LivroResponseDTO> findByDescricao(String descricao);
 
