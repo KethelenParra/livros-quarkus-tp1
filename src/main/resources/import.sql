@@ -11,8 +11,8 @@ INSERT INTO usuario (nome, dataNascimento, email, senha, id_telefone, sexo, cpf)
 ('Maria Souza', '1995-03-15', 'maria.souza@gmail.com', 'senha456', 12, 2, '98765432109'),
 ('Carlos Oliveira', '1988-05-20', 'carlos.oliveira@gmail.com', 'senha789', 13, 1, '45678912365'),
 ('Ana Santos', '1992-11-10', 'ana.santos@gmail.com', 'senhaabc', 14, 2, '98765412387'),
-('Fernanda Oliveira', '1980-07-25', 'fernanda@gmail.com', 'senhaxyz', 15, 2, '12345678901'),
-('Carlos Silva', '1975-09-18', 'carlos@gmail.com', 'senha123abc', 16, 1, '98765432109');
+('Fernanda Oliveira', '1980-07-25', 'fernanda@gmail.com', 'senhaxyz', 15, 2, '56456434533'),
+('Carlos Silva', '1975-09-18', 'carlos@gmail.com', 'senha123abc', 16, 1, '78567345323');
 
 -- Inserir clientes
 INSERT INTO cliente (endereco, cep, cidade, estado, id_usuario) VALUES 
