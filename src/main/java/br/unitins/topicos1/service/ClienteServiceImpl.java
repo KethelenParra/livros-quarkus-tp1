@@ -11,6 +11,7 @@ import br.unitins.topicos1.model.Sexo;
 import br.unitins.topicos1.model.Usuario;
 import br.unitins.topicos1.repository.ClienteRepository;
 import br.unitins.topicos1.repository.UsuarioRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -30,7 +31,8 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional
     public ClienteResponseDTO create(@Valid ClienteDTO dto){
-        
+        validarCpfCliente(dto.cpf());
+
         // Criar uma instância de Usuario com os dados do clienteDTO
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
@@ -54,6 +56,12 @@ public class ClienteServiceImpl implements ClienteService {
 
         clienteRepository.persist(cliente);
         return ClienteResponseDTO.valueOf(cliente);
+    }
+
+    public void validarCpfCliente(String cpf){
+        Usuario cliente = usuarioRepository.findByCpfUsuario(cpf);
+        if (cliente != null)
+        throw  new ValidationException("cpf", "O CPF: '"+ cpf +"' já existe.");
     }
 
     @Override
