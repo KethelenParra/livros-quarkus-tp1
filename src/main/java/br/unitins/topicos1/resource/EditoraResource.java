@@ -3,7 +3,6 @@ package br.unitins.topicos1.resource;
 import br.unitins.topicos1.dto.EditoraDTO;
 import br.unitins.topicos1.service.EditoraService;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -48,13 +47,11 @@ public class EditoraResource {
     }
 
     @POST
-    @Transactional
     public Response create (EditoraDTO dto){
         return Response.status(Status.CREATED).entity(editoraService.create(dto)).build();
     }
 
     @PUT
-    @Transactional
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, EditoraDTO dto){
         editoraService.update(id, dto);
@@ -62,7 +59,6 @@ public class EditoraResource {
     }
 
     @DELETE
-    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id){
         editoraService.delete(id);
