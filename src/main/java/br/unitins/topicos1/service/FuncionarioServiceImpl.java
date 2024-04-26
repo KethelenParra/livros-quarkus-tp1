@@ -11,6 +11,7 @@ import br.unitins.topicos1.model.Sexo;
 import br.unitins.topicos1.model.Usuario;
 import br.unitins.topicos1.repository.FuncionarioRepository;
 import br.unitins.topicos1.repository.UsuarioRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -29,7 +30,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     @Transactional
     public FuncionarioResponseDTO create(@Valid FuncionarioDTO dto){
-
+        validarCpfFuncionario(dto.cpf());
+        
          // Criar uma instância de Usuario com os dados do FuncionarioDTO
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
@@ -47,13 +49,19 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         Funcionario funcionario = new Funcionario();
         funcionario.setCargo(dto.cargo());
         funcionario.setSalario(dto.salario());
-        funcionario.setUsuario(usuario); // Agora o Usuario está persistido e pode ser associado ao Funcionario
+        funcionario.setUsuario(usuario); 
 
         // Persistir o Funcionario no banco de dados
         funcionarioRepository.persist(funcionario);
 
         // Retornar uma representação do funcionário criado
         return FuncionarioResponseDTO.valueOf(funcionario);
+    }
+
+    public void validarCpfFuncionario(String cpf){
+        Usuario funcionario = usuarioRepository.findByCpfUsuario(cpf);
+        if (funcionario != null)
+        throw  new ValidationException("cpf", "O  CPF: '"+ cpf +"' já existe.");
     }
 
     @Override
