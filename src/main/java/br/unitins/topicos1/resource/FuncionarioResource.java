@@ -36,6 +36,12 @@ public class FuncionarioResource {
     }
 
     @GET
+    @Path("/search/cpf/{cpf}")
+    public Response findByCpf(@PathParam("cpf") String cpf) {
+        return Response.ok(funcionarioService.findByCpf(cpf)).build();
+    }
+
+    @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(funcionarioService.findById(id)).build();

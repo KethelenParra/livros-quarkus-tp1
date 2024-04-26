@@ -1,11 +1,11 @@
 package br.unitins.topicos1.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import br.unitins.topicos1.dto.FuncionarioDTO;
 import br.unitins.topicos1.dto.FuncionarioResponseDTO;
 import br.unitins.topicos1.dto.TelefoneDTO;
+import br.unitins.topicos1.dto.UsuarioResponseDTO;
 import br.unitins.topicos1.model.Funcionario;
 import br.unitins.topicos1.model.Sexo;
 import br.unitins.topicos1.model.Usuario;
@@ -29,13 +29,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     @Transactional
     public FuncionarioResponseDTO create(@Valid FuncionarioDTO dto){
-        LocalDate dataNascimento = LocalDate.parse(dto.dataNascimento());
 
          // Criar uma instância de Usuario com os dados do FuncionarioDTO
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
         usuario.setSenha(dto.senha());
-        usuario.setDataNascimento(dataNascimento);
+        usuario.setDataNascimento(dto.dataNascimento());
         usuario.setEmail(dto.email());
         usuario.setCpf(dto.cpf());
         usuario.setSexo(Sexo.valueOf(dto.idSexo()));
@@ -63,14 +62,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         Funcionario funcionarioBanco = funcionarioRepository.findById(id);
         funcionarioBanco.setCargo(dto.cargo());
         funcionarioBanco.setSalario(dto.salario());
-        
-        LocalDate dataNascimento = LocalDate.parse(dto.dataNascimento());
 
          // Criar uma instância de Usuario com os dados do FuncionarioDTO
         Usuario usuario =  funcionarioBanco.getUsuario();
         usuario.setNome(dto.nome());
         usuario.setSenha(dto.senha());
-        usuario.setDataNascimento(dataNascimento);
+        usuario.setDataNascimento(dto.dataNascimento());
         usuario.setEmail(dto.email());
         usuario.setCpf(dto.cpf());
         usuario.setSexo(Sexo.valueOf(dto.idSexo()));
@@ -96,6 +93,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     public List<FuncionarioResponseDTO> findByCargo(String cargo) {
         return funcionarioRepository.findByCargo(cargo).stream().map(funcionario -> FuncionarioResponseDTO.valueOf(funcionario)).toList();
+    }
+    
+    @Override
+    public List<UsuarioResponseDTO> findByCpf(String cpf) {
+        return usuarioRepository.findByCpf(cpf).stream().map(c -> UsuarioResponseDTO.valueOf(c)).toList();
     }
 }
 

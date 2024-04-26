@@ -1,11 +1,12 @@
 package br.unitins.topicos1.dto;
 
+import java.time.LocalDate;
+
 public record FuncionarioDTO(
     Double salario,
     String cargo,
-    Long usuario,
     String nome,
-    String dataNascimento,
+    LocalDate dataNascimento,
     String email,
     String senha,
     String cpf,
