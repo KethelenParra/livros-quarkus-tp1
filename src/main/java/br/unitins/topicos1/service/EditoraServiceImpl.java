@@ -77,7 +77,7 @@ public class EditoraServiceImpl implements EditoraService {
 
     @Override
     public List<EditoraResponseDTO> findByNome(String nome) {
-        return editoraRepository.findByNome(nome).stream().map(editoraes -> EditoraResponseDTO.valueOf(editoraes)).toList();
+        return editoraRepository.findByNome(nome).stream().map(editoras -> EditoraResponseDTO.valueOf(editoras)).toList();
     }
 
     @Override
