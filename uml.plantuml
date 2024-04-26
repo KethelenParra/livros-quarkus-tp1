@@ -1,27 +1,28 @@
 @startuml
 
 class Usuario {
-  id : Long
-  usuario : String
-  senha : String
-  nomeCompleto : String
-  email : String
-  sexo : Sexo
-  cpf : String
-  cep : String
-  endereco : String
-  estado : String
-  cidade : String
+  - id : Long
+  - nome : String
+  - senha : String
+  - email : String
+  - sexo : Sexo
+  - cpf : String
   
 }
 
 class Cliente{
   - id : Long 
+  - cep : String
+  - endereco : String
+  - estado : String
+  - cidade : String
 }
 
 
 class Funcionario {
  - id : Long
+ - cargo : String
+ - salario : Double
 }
 
 enum Sexo{
@@ -37,7 +38,6 @@ class Livro {
  - quantEstoque : Integer
  - isbn : String
  - dataLancamento : LocalDate
- - dataCadastro : LocalDate
  - descricao : String
 }
 
