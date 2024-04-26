@@ -1,11 +1,11 @@
 package br.unitins.topicos1.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import br.unitins.topicos1.dto.ClienteDTO;
 import br.unitins.topicos1.dto.ClienteResponseDTO;
 import br.unitins.topicos1.dto.TelefoneDTO;
+import br.unitins.topicos1.dto.UsuarioResponseDTO;
 import br.unitins.topicos1.model.Cliente;
 import br.unitins.topicos1.model.Sexo;
 import br.unitins.topicos1.model.Usuario;
@@ -30,13 +30,12 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional
     public ClienteResponseDTO create(@Valid ClienteDTO dto){
-        LocalDate dataNascimento = LocalDate.parse(dto.dataNascimento());
         
         // Criar uma instância de Usuario com os dados do clienteDTO
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
         usuario.setSenha(dto.senha());
-        usuario.setDataNascimento(dataNascimento);
+        usuario.setDataNascimento(dto.dataNascimento());
         usuario.setEmail(dto.email());
         usuario.setCpf(dto.cpf());
         usuario.setSexo(Sexo.valueOf(dto.idSexo()));
@@ -65,18 +64,19 @@ public class ClienteServiceImpl implements ClienteService {
         clienteBanco.setCep(dto.cep());
         clienteBanco.setCidade(dto.cidade());
         clienteBanco.setEstado(dto.estado());
-        
-        LocalDate dataNascimento = LocalDate.parse(dto.dataNascimento());
-        
+            
         // Criar uma instância de Usuario com os dados do clienteDTO
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
         usuario.setSenha(dto.senha());
-        usuario.setDataNascimento(dataNascimento);
+        usuario.setDataNascimento(dto.dataNascimento());
         usuario.setEmail(dto.email());
         usuario.setCpf(dto.cpf());
         usuario.setSexo(Sexo.valueOf(dto.idSexo()));
         usuario.setTelefone(TelefoneDTO.convertToTelefone(dto.telefone()));
+    
+        clienteBanco.setUsuario(usuario);
+        usuarioRepository.persist(usuario);
     }
 
     @Override
@@ -98,6 +98,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public List<ClienteResponseDTO> findByEstado(String estado) {
         return clienteRepository.findByEstado(estado).stream().map(clientes -> ClienteResponseDTO.valueOf(clientes)).toList();
+    }
+
+    @Override
+    public List<UsuarioResponseDTO> findByCpf(String cpf) {
+        return usuarioRepository.findByCpf(cpf).stream().map(c -> UsuarioResponseDTO.valueOf(c)).toList();
     }
 }
 

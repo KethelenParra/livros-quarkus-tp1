@@ -36,6 +36,12 @@ public class ClienteResource {
     }
 
     @GET
+    @Path("/search/cpf/{cpf}")
+    public Response findByCpf(@PathParam("cpf") String cpf) {
+        return Response.ok(clienteService.findByCpf(cpf)).build();
+    }
+
+    @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Long id) {
         return Response.ok(clienteService.findById(id)).build();
