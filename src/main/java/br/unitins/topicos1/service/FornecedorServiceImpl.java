@@ -96,5 +96,8 @@ public class FornecedorServiceImpl implements FornecedorService {
     public List<FornecedorResponseDTO> findByEstado(String estado) {
         return fornecedorRepository.findByEstado(estado).stream().map(fornecedores -> FornecedorResponseDTO.valueOf(fornecedores)).toList();
     }
-    
+    @Override
+    public List<FornecedorResponseDTO> findByCnpj(String cnpj) {
+        return fornecedorRepository.findByCnpj(cnpj).stream().map(fornecedores -> FornecedorResponseDTO.valueOf(fornecedores)).toList();
+    }
 }

@@ -53,6 +53,12 @@ public class FornecedorResource {
         return Response.ok(fornecedorService.findByCidade(cidade)).build();
     }
 
+    @GET
+    @Path("/search/cnpj/{cnpj}")
+    public Response findByCnpj(@PathParam("cnpj") String cnpj){
+        return Response.ok(fornecedorService.findByCnpj(cnpj)).build();
+    }
+
     @POST
     public Response create(@Valid FornecedorDTO dto){
         return Response.status(Status.CREATED).entity(fornecedorService.create(dto)).build();

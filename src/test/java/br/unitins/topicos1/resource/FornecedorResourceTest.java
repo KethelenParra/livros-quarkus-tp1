@@ -54,6 +54,16 @@ public class FornecedorResourceTest {
             .statusCode(200)
             .body("estado", everyItem(containsString("Paulo")));
     }
+   
+    @Test
+    public void findByCnpjTest() {
+        given()
+            .when()
+            .get("/fornecedores/search/cnpj/333")
+            .then()
+            .statusCode(200)
+            .body("cnpj", everyItem(containsString("333")));
+    }
 
     @Test
     public void findByCidadeTest() {
