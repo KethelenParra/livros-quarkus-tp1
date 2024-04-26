@@ -24,6 +24,7 @@ public class FornecedorServiceImpl implements FornecedorService {
     @Transactional
     public FornecedorResponseDTO create(@Valid FornecedorDTO dto) {
         validarNomeFornecedor(dto.nome());
+        validarCnpjFornecedor(dto.cnpj());
 
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNome(dto.nome());
@@ -44,6 +45,12 @@ public class FornecedorServiceImpl implements FornecedorService {
         Fornecedor fornecedor = fornecedorRepository.findByNomeFornecedor(nome);
         if (fornecedor != null)
             throw  new ValidationException("nome", "O fornecedor '"+nome+"' já existe.");
+    }
+
+    public void validarCnpjFornecedor(String cnpj) {
+        Fornecedor cnpjfornecedor = fornecedorRepository.findByNomeFornecedor(cnpj);
+        if (cnpjfornecedor != null)
+            throw  new ValidationException("cnpj", "O CNPJ: '"+cnpj+"' já existe.");
     }
 
     @Override

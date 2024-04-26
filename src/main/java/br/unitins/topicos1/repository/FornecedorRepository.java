@@ -28,4 +28,8 @@ public class FornecedorRepository implements PanacheRepository<Fornecedor>{
     public Fornecedor findByNomeFornecedor(String nome) {
         return find("UPPER(nome) = ?1",  nome.toUpperCase() ).firstResult();
     }
+
+    public Fornecedor findByCnpjFornecedor(String cnpj){
+        return find("cnpj LIKE ?1", "%" + cnpj + "%").firstResult();
+    }
 }
