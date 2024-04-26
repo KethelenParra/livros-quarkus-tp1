@@ -6,9 +6,9 @@ public record TelefoneResponseDTO(
     String codigoArea,
     String numero
 ) {
-    public static TelefoneResponseDTO valueOf(Telefone t){
-        return new TelefoneResponseDTO(t.getCodigoArea(), t.getNumero());
-    }
-    
-    
+    public static TelefoneResponseDTO valueOf(Telefone telefone){
+        return new TelefoneResponseDTO(
+            telefone.getCodigoArea(), 
+            telefone.getNumero());
+    } 
 }

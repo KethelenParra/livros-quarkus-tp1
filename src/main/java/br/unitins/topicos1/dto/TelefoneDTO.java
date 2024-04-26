@@ -9,7 +9,7 @@ public record TelefoneDTO(
     public static Telefone convertToTelefone(TelefoneDTO telefoneDto){
         Telefone telefone = new Telefone();
 
-        telefone.setCodigoArea(telefoneDto.codigoArea);
+        telefone.setCodigoArea(telefoneDto.codigoArea());
         telefone.setNumero(telefoneDto.numero());
         return telefone;
     } 
