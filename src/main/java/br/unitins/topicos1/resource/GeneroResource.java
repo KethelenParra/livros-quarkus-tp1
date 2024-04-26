@@ -3,7 +3,6 @@ package br.unitins.topicos1.resource;
 import br.unitins.topicos1.dto.GeneroDTO;
 import br.unitins.topicos1.service.GeneroService;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -48,13 +47,11 @@ public class GeneroResource {
     }
 
     @POST
-    @Transactional
     public Response create (GeneroDTO dto){
         return Response.status(Status.CREATED).entity(generoService.create(dto)).build();
     }
 
     @PUT
-    @Transactional
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GeneroDTO dto){
         generoService.update(id, dto);
@@ -62,7 +59,6 @@ public class GeneroResource {
     }
 
     @DELETE
-    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id){
         generoService.delete(id);
