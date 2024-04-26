@@ -3,7 +3,6 @@ package br.unitins.topicos1.resource;
 import br.unitins.topicos1.dto.LivroDTO;
 import br.unitins.topicos1.service.LivroService;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -54,13 +53,11 @@ public class LivroResource {
     }
 
     @POST
-    @Transactional
     public Response create (LivroDTO dto){
         return Response.status(Status.CREATED).entity(livroService.create(dto)).build();
     }
 
     @PUT
-    @Transactional
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, LivroDTO dto){
         livroService.update(id, dto);
@@ -68,7 +65,6 @@ public class LivroResource {
     }
 
     @DELETE
-    @Transactional
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id){
         livroService.delete(id);
