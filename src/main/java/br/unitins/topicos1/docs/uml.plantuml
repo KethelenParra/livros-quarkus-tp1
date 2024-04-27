@@ -18,7 +18,6 @@ class Cliente{
   - cidade : String
 }
 
-
 class Funcionario {
  - id : Long
  - cargo : String
