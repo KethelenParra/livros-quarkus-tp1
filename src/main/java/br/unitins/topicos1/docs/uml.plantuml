@@ -89,7 +89,7 @@ class Telefone{
 
 Usuario "1" <-- "1" Cliente
 Usuario "1" <-- "1" Funcionario
-Usuario "*" -- "1" Sexo
+Usuario "*" -up- "1" Sexo
 Usuario "1" *--> "1" Telefone
 
 Livro "*" o--> "*" Genero
