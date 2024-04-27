@@ -1,95 +1,150 @@
 @startuml uml_ecommerce_livro
 
 class Usuario {
-  - id : Long
-  - nome : String
-  - senha : String
-  - email : String
-  - sexo : Sexo
-  - cpf : String
+  - id: Long
+  - nome: String
+  - senha: String
+  - email: String
+  - sexo: Sexo
+  - cpf: String
   
 }
 
 class Cliente{
-  - id : Long 
-  - cep : String
-  - endereco : String
-  - estado : String
-  - cidade : String
+  - id: Long 
+  - cep: String
+  - endereco: String
+  - estado: String
+  - cidade: String
 }
 
 class Funcionario {
- - id : Long
- - cargo : String
- - salario : Double
+ - id: Long
+ - cargo: String
+ - salario: Double
 }
 
 enum Sexo{
- - FEMININO : Integer
- - MASCULINO : Integer
+ - FEMININO: int
+ - MASCULINO: int
 }
 
 class Livro {
- - id : Long
- - titulo : String
- - editora : String
- - preco : Double
- - quantEstoque : Integer
- - isbn : String
- - dataLancamento : LocalDate
- - descricao : String
+ - id: Long
+ - titulo: String
+ - preco: Double
+ - quantEstoque: Integer
+ - isbn: String
+ - dataLancamento: LocalDate
+ - descricao: String
 }
 
 class Genero{
- - id : Long
- - nome : String
- - descricao : String
+ - id: Long
+ - nome: String
+ - descricao: String
 }
 
 class Autor{
- - id : Long
- - nome : String
- - biografia : String
- - obrasPublicadas : Livros
- - redeSocias : String
+ - id: Long
+ - nome: String
+ - biografia: String
+ - obrasPublicadas: Livros
+ - redeSocias: String
 }
 
 class Fornecedor{
- - id : Long
- - nome : String
- - cnpj : String
- - inscricaoEstadual : String
- - email : String
- - endereco : String
- - cep : String
- - cidade : String
- - estado : String
+ - id: Long
+ - nome: String
+ - cnpj: String
+ - inscricaoEstadual: String
+ - email: String
+ - endereco: String
+ - cep: String
+ - cidade: String
+ - estado: String
 }
 
 enum Classificacao{
-  - LIVRE : Integer 
-  - DEZANOS : Integer
-  - DOZEANOS : Integer
-  - QUATORZEANOS : Integer
-  - DEZESSEISANOS : Integer
-  - DEZOITOANOS : Integer
+  - LIVRE: int 
+  - DEZANOS: int
+  - DOZEANOS: int
+  - QUATORZEANOS: int
+  - DEZESSEISANOS: int
+  - DEZOITOANOS: int
 }
 
 class Editora {
- - nome : String
- - endereco : String
- - estado : String
- - email : String
+ - nome: String
+ - endereco: String
+ - estado: String
+ - email: String
 }
 
 class Telefone{
- - codigoArea : String
- - numero : String
+ - codigoArea: String
+ - numero: String
+}
+
+class Pedido{
+ - id: Long
+ - item: ItemPedido
+ - valorTotal: Double
+ - parcelas: Integer
+ - metodoPagamento: String
+ - dataPedido: LocalDateTime
+ - historicoEnvio: String
+}
+
+enum StatusPedido {
+  - EM_PROCESSAMENTO: int
+  - EM_TRANSITO: int
+  - COM_TRANSPORTADORA: int
+  - ENTREGUE: int
+  - CANCELADO: int
+}
+
+enum StatusPagamento{                         
+  - AGUARDADO_PAGAMENTO: int
+  - EM_PROCESSAMENTO: int
+  - PAGAMENTO_CONFIRMADO: int
+  - PAGAMENTO_RECUSADO: int
+  - PAGAMENTO_CANCELADO: int
+  - PAGO: int
+}
+
+class ItemPedido{
+ - id: Long
+ - valor: Double
+ - quantidade: Integer
+ - desconto: Double
+}
+
+class FormaPagamento{
+  - parcela: int
+  - dataPagamento: LocalDateTime
+}
+
+enum TipoPagamento{
+  + CREDITO: int
+  + DEBITO: int
+  + PIX: int
+}
+
+class Transportadora{
+ - id: Long
+ - nome: String
+ - email: String
+ - cnpj: String
+ - inscricaoEstadual: String
+ - cidade: String
+ - estado: String
+ - regiaoAtuacao: String
 }
 
 Usuario "1" <-- "1" Cliente
 Usuario "1" <-- "1" Funcionario
-Usuario "*" -up- "1" Sexo
+Usuario "*" -- "1" Sexo
 Usuario "1" *--> "1" Telefone
 
 Livro "*" o--> "*" Genero
@@ -100,5 +155,12 @@ Livro "*" --> "1" Classificacao
 
 Editora "1" *--> "1" Telefone
 Fornecedor "1" *--> "1" Telefone
+Transportadora "1" *--> "1" Telefone
+
+Pedido "1" <--* "1" Transportadora
+Pedido "*" --> "1" Cliente
+Pedido "1" *--> "*" ItemPedido
+
+ItemPedido "*" --> "1" Livro
 
 @enduml
