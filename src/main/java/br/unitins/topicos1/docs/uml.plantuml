@@ -1,4 +1,4 @@
-@startuml
+@startuml uml_ecommerce_livro
 
 class Usuario {
   - id : Long
