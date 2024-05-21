@@ -5,26 +5,19 @@ INSERT INTO telefone (codigoArea, numero) VALUES
 ('55', '175'), ('56', '745'), ('31', '7777'), ('41', '6666'), 
 ('51', '5555'), ('32', '7757'), ('32', '7456'), ('87', '2203');
 
--- Inserir usuários
-INSERT INTO usuario (nome, dataNascimento, email, senha, id_telefone, sexo, cpf) VALUES 
-('João Silva', '1990-01-01', 'joao.silva@gmail.com', 'senha123', 11, 1, '12345678901'),
-('Maria Souza', '1995-03-15', 'maria.souza@gmail.com', 'senha456', 12, 2, '98765432109'),
-('Carlos Oliveira', '1988-05-20', 'carlos.oliveira@gmail.com', 'senha789', 13, 1, '45678912365'),
-('Ana Santos', '1992-11-10', 'ana.santos@gmail.com', 'senhaabc', 14, 2, '98765412387'),
-('Fernanda Oliveira', '1980-07-25', 'fernanda@gmail.com', 'senhaxyz', 15, 2, '56456434533'),
-('Carlos Silva', '1975-09-18', 'carlos@gmail.com', 'senha123abc', 16, 1, '78567345323');
+INSERT INTO usuario (nome, username, dataNascimento, email, senha, id_telefone, sexo, cpf) 
+VALUES ('João Silva', 'Joao10', '1990-01-01', 'joao.silva@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 1, 1, '12345678901'),
+       ('Maria Souza', 'Maria20', '1995-03-15', 'maria.souza@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 2, 2, '98765432109'),
+       ('Carlos Oliveira', 'carlos30', '1988-05-20', 'carlos.oliveira@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 3, 1, '45678912365');
 
--- Inserir clientes
-INSERT INTO cliente (endereco, cep, cidade, estado, id_usuario) VALUES 
-('Rua A, 123', '12345-678', 'São Paulo', 'SP', 1),
-('Av. B, 456', '54321-098', 'Rio de Janeiro', 'RJ', 2),
-('Rua C, 789', '98765-432', 'Belo Horizonte', 'MG', 3);
+-- Certifique-se de que os IDs dos usuários foram inseridos corretamente antes de continuar.
 
--- Inserir funcionários
-INSERT INTO funcionario (cargo, salario, id_usuario) VALUES 
-('Gerente', 5000.00, 4),
-('Especialista em E-commerce', 3000.00, 5),
-('Analista de Dados de Vendas', 2500.00, 6);
+INSERT INTO cliente (endereco, cep, cidade, estado, id_usuario) 
+VALUES ('Rua A, 123', '12345-678', 'São Paulo', 'SP', 1);
+
+INSERT INTO funcionario (cargo, salario, id_usuario) 
+VALUES ('Gerente', 5000.00, 2), 
+       ('Especialista em E-commerce', 3000.00, 3);
 
 -- Inserir autores
 INSERT INTO autor (nome, biografia) VALUES ('Colleen Hoover', 'Colleen Hoover é uma escritora norte-americana que escreve principalmente romances nos gêneros romântico e ficção para jovens adultos. Muitos de seus trabalhos foram autopublicados antes de serem adquiridos por uma editora.');
