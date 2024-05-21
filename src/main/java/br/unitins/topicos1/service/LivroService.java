@@ -3,7 +3,7 @@ package br.unitins.topicos1.service;
 import java.util.List;
 
 import br.unitins.topicos1.dto.LivroDTO;
-import br.unitins.topicos1.dto.LivroResponseDTO;
+import br.unitins.topicos1.dto.Response.LivroResponseDTO;
 import jakarta.validation.Valid;
 
 public interface LivroService {

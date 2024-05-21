@@ -1,6 +1,6 @@
-package br.unitins.topicos1.dto;
+package br.unitins.topicos1.dto.Response;
 
-import br.unitins.topicos1.model.Telefone;
+import br.unitins.topicos1.model.telefone.Telefone;
 
 public record TelefoneResponseDTO(
     String codigoArea,

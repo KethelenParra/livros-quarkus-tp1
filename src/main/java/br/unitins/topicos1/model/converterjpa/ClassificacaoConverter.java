@@ -1,6 +1,6 @@
 package br.unitins.topicos1.model.converterjpa;
 
-import br.unitins.topicos1.model.Classificacao;
+import br.unitins.topicos1.model.Enum.Classificacao;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

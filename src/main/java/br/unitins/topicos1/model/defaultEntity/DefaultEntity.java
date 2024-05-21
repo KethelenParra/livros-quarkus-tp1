@@ -1,4 +1,4 @@
-package br.unitins.topicos1.model;
+package br.unitins.topicos1.model.defaultEntity;
 
 import java.time.LocalDateTime;
 

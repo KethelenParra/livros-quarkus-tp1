@@ -1,4 +1,4 @@
-package br.unitins.topicos1.model;
+package br.unitins.topicos1.model.Enum;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

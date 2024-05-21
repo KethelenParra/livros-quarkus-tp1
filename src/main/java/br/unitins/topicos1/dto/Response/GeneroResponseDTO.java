@@ -1,6 +1,6 @@
-package br.unitins.topicos1.dto;
+package br.unitins.topicos1.dto.Response;
 
-import br.unitins.topicos1.model.Genero;
+import br.unitins.topicos1.model.genero.Genero;
 
 public record GeneroResponseDTO(
     Long id,  

@@ -1,5 +1,6 @@
-package br.unitins.topicos1.model;
+package br.unitins.topicos1.model.telefone;
 
+import br.unitins.topicos1.model.defaultEntity.DefaultEntity;
 import jakarta.persistence.Entity;
 
 @Entity
