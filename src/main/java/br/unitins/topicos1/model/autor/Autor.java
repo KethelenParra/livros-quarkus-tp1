@@ -1,7 +1,9 @@
-package br.unitins.topicos1.model;
+package br.unitins.topicos1.model.autor;
 
 import java.util.List;
 
+import br.unitins.topicos1.model.defaultEntity.DefaultEntity;
+import br.unitins.topicos1.model.livro.Livro;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;

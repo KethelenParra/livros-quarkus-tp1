@@ -2,6 +2,7 @@ package br.unitins.topicos1.resource;
 
 import br.unitins.topicos1.dto.AutorDTO;
 import br.unitins.topicos1.service.AutorService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -26,44 +27,50 @@ public class AutorResource {
 
     @GET
     @Path("/{id}")
-    public Response findById(@PathParam("id") Long id){
+    @RolesAllowed({"Funcionario", "Cliente"})
+    public Response findById(@PathParam("id") Long id) {
         return Response.ok(autorService.findById(id)).build();
     }
 
     @GET
-    public Response findAll(){
+    @RolesAllowed({"Funcionario", "Cliente"})
+    public Response findAll() {
         return Response.ok(autorService.findAll()).build();
     }
 
     @GET
     @Path("/search/nome/{nome}")
-    public Response findByNome(@PathParam("nome") String nome){
+    @RolesAllowed({"Funcionario", "Cliente"})
+    public Response findByNome(@PathParam("nome") String nome) {
         return Response.ok(autorService.findByNome(nome)).build();
     }
 
     @GET
     @Path("/search/biografia/{biografia}")
-    public Response findByBiografia(@PathParam("biografia") String biografia){
+    @RolesAllowed({"Funcionario", "Cliente"}) // Permite acesso a clientes e funcionários
+    public Response findByBiografia(@PathParam("biografia") String biografia) {
         return Response.ok(autorService.findByBiografia(biografia)).build();
     }
 
     @POST
-    public Response create(@Valid AutorDTO dto){
+    @RolesAllowed({"Funcionario"}) // Permite acesso apenas a funcionários
+    public Response create(@Valid AutorDTO dto) {
         return Response.status(Status.CREATED).entity(autorService.create(dto)).build();
     }
 
     @PUT
     @Path("/{id}")
-    public Response update(@PathParam("id") Long id, AutorDTO dto){
+    @RolesAllowed({"Funcionario"}) // Permite acesso apenas a funcionários
+    public Response update(@PathParam("id") Long id, AutorDTO dto) {
         autorService.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
     }
 
     @DELETE
     @Path("/{id}")
-    public Response delete(@PathParam("id") Long id){
-       autorService.delete(id);
-       return Response.status(Status.NO_CONTENT).build();
+    @RolesAllowed({"Funcionario"}) // Permite acesso apenas a funcionários
+    public Response delete(@PathParam("id") Long id) {
+        autorService.delete(id);
+        return Response.status(Status.NO_CONTENT).build();
     }
-   
 }
