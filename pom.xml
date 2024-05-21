@@ -57,7 +57,7 @@
       <artifactId>quarkus-hibernate-orm</artifactId>
     </dependency>
     <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-hibernate-validator -->
-    <dependency>
+ <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-validator</artifactId>
     </dependency>
@@ -71,6 +71,17 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+
+  <dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-jwt</artifactId>
+  </dependency>
+
+  <dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-jwt-build</artifactId>
+  </dependency>
+
   </dependencies>
   <build>
     <plugins>
