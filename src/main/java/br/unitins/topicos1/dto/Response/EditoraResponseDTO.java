@@ -1,6 +1,6 @@
-package br.unitins.topicos1.dto;
+package br.unitins.topicos1.dto.Response;
 
-import br.unitins.topicos1.model.Editora;
+import br.unitins.topicos1.model.editora.Editora;
 
 public record EditoraResponseDTO(
     Long id,  

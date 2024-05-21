@@ -2,6 +2,7 @@ package br.unitins.topicos1.resource;
 
 import br.unitins.topicos1.dto.EditoraDTO;
 import br.unitins.topicos1.service.EditoraService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -25,34 +26,40 @@ public class EditoraResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findById(@PathParam("id") Long id){
         return Response.ok(editoraService.findById(id)).build();
     }
 
     @GET
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findAll(){
         return Response.ok(editoraService.findAll()).build();
     }
 
     @GET
     @Path("/search/nome/{nome}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByNome(@PathParam("nome") String nome){
         return Response.ok(editoraService.findByNome(nome)).build();
     }
 
     @GET
     @Path("/search/estado/{estado}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByEstado(@PathParam("estado") String estado){
         return Response.ok(editoraService.findByEstado(estado)).build();
     }
 
     @POST
+    @RolesAllowed({"Funcionario"})
     public Response create (EditoraDTO dto){
         return Response.status(Status.CREATED).entity(editoraService.create(dto)).build();
     }
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, EditoraDTO dto){
         editoraService.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -60,6 +67,7 @@ public class EditoraResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
         editoraService.delete(id);
         return Response.status(Status.NO_CONTENT).build();

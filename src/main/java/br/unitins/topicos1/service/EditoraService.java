@@ -3,7 +3,7 @@ package br.unitins.topicos1.service;
 import java.util.List;
 
 import br.unitins.topicos1.dto.EditoraDTO;
-import br.unitins.topicos1.dto.EditoraResponseDTO;
+import br.unitins.topicos1.dto.Response.EditoraResponseDTO;
 import jakarta.validation.Valid;
 
 public interface EditoraService {
