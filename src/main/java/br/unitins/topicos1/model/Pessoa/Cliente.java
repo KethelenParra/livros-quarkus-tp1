@@ -1,6 +1,7 @@
-package br.unitins.topicos1.model;
+package br.unitins.topicos1.model.Pessoa;
 
 
+import br.unitins.topicos1.model.defaultEntity.DefaultEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

@@ -8,6 +8,7 @@ public record ClienteDTO(
     String estado,
     String cidade, 
     String nome,
+    String username,
     LocalDate dataNascimento,
     String email,
     String senha,
