@@ -3,7 +3,7 @@ package br.unitins.topicos1.service;
 import java.util.List;
 
 import br.unitins.topicos1.dto.GeneroDTO;
-import br.unitins.topicos1.dto.GeneroResponseDTO;
+import br.unitins.topicos1.dto.Response.GeneroResponseDTO;
 import jakarta.validation.Valid;
 
 public interface GeneroService {

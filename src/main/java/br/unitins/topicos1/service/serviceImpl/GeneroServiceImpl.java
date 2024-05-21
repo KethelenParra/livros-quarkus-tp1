@@ -1,11 +1,12 @@
-package br.unitins.topicos1.service;
+package br.unitins.topicos1.service.serviceImpl;
 
 import java.util.List;
 
 import br.unitins.topicos1.dto.GeneroDTO;
-import br.unitins.topicos1.dto.GeneroResponseDTO;
-import br.unitins.topicos1.model.Genero;
+import br.unitins.topicos1.dto.Response.GeneroResponseDTO;
+import br.unitins.topicos1.model.genero.Genero;
 import br.unitins.topicos1.repository.GeneroRepository;
+import br.unitins.topicos1.service.GeneroService;
 import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
