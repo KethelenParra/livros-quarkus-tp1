@@ -6,6 +6,7 @@ public record FuncionarioDTO(
     Double salario,
     String cargo,
     String nome,
+    String username,
     LocalDate dataNascimento,
     String email,
     String senha,

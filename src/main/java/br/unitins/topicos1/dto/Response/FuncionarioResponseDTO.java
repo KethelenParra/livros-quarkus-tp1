@@ -1,6 +1,6 @@
-package br.unitins.topicos1.dto;
+package br.unitins.topicos1.dto.Response;
 
-import br.unitins.topicos1.model.Funcionario;
+import br.unitins.topicos1.model.Pessoa.Funcionario;
 
 public record FuncionarioResponseDTO(
     Long id,

@@ -1,4 +1,4 @@
-package br.unitins.topicos1.resource;
+package br.unitins.topicos1.resource.pessoa;
 
 import br.unitins.topicos1.dto.FuncionarioDTO;
 import br.unitins.topicos1.service.FuncionarioService;

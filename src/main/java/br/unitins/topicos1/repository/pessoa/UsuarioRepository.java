@@ -1,8 +1,8 @@
-package br.unitins.topicos1.repository;
+package br.unitins.topicos1.repository.pessoa;
 
 import java.util.List;
 
-import br.unitins.topicos1.model.Usuario;
+import br.unitins.topicos1.model.Pessoa.Usuario;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -19,5 +19,4 @@ public class UsuarioRepository implements PanacheRepository<Usuario>{
     public Usuario findByCpfUsuario(String cpf){
         return find("cpf LIKE ?1", "%" + cpf + "%").firstResult();
     }
-
 }

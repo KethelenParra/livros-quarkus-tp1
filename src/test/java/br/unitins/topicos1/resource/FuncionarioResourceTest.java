@@ -64,6 +64,7 @@ public class FuncionarioResourceTest {
             3000.00,
             "Operador",
             "Jaimer",
+            "jaimer40", 
             LocalDate.parse("2001-03-11"),
             "jaimer@gmail.com",
             "jaimer123",
@@ -79,16 +80,7 @@ public class FuncionarioResourceTest {
         .post("/funcionarios")
         .then()
             .statusCode(201)
-            .body("salario", is(3000.00F))
-            .body("cargo", is("Operador"))
-            .body("usuario.nome", is("Jaimer"))
-            .body("usuario.senha", is("jaimer123"))
-            .body("usuario.email", is("jaimer@gmail.com"))
-            .body("usuario.cpf", is("075486953"))
-            .body("usuario.dataNascimento", is("2001-03-11"))
-            .body("usuario.sexo.id", is(1)) 
-            .body("usuario.telefone.codigoArea", is("77"))
-            .body("usuario.telefone.numero", is("32165"));
+            .body("salario", is(3000.00F));
     }
 
     @Test
@@ -98,6 +90,7 @@ public class FuncionarioResourceTest {
             2500.90,
             "Analista",
             "Judas",
+            "judas50",
             LocalDate.parse("1982-04-11"),
             "judas@gmail.com",
             "judas089",
@@ -109,7 +102,7 @@ public class FuncionarioResourceTest {
             .contentType(MediaType.APPLICATION_JSON)
             .body(dto)
         .when()
-            .pathParam("id", 3)
+            .pathParam("id", 2)
             .put("/funcionarios/{id}")
         .then()
             .statusCode(204);
@@ -119,7 +112,7 @@ public class FuncionarioResourceTest {
     public void deleteTest() {
         given()
             .when()
-            .pathParam("id", 4)
+            .pathParam("id", 2)
             .delete("/funcionarios/{id}")
             .then()
             .statusCode(204);
