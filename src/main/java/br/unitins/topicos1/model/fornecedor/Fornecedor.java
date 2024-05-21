@@ -1,5 +1,7 @@
-package br.unitins.topicos1.model;
+package br.unitins.topicos1.model.fornecedor;
 
+import br.unitins.topicos1.model.defaultEntity.DefaultEntity;
+import br.unitins.topicos1.model.telefone.Telefone;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -3,7 +3,7 @@ package br.unitins.topicos1.service;
 import java.util.List;
 
 import br.unitins.topicos1.dto.FornecedorDTO;
-import br.unitins.topicos1.dto.FornecedorResponseDTO;
+import br.unitins.topicos1.dto.Response.FornecedorResponseDTO;
 import jakarta.validation.Valid;
 
 public interface FornecedorService {

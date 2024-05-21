@@ -1,13 +1,14 @@
-package br.unitins.topicos1.service;
+package br.unitins.topicos1.service.serviceImpl;
 
 import java.util.List;
 
 import br.unitins.topicos1.dto.FornecedorDTO;
-import br.unitins.topicos1.dto.FornecedorResponseDTO;
 import br.unitins.topicos1.dto.TelefoneDTO;
-import br.unitins.topicos1.model.Fornecedor;
-import br.unitins.topicos1.model.Telefone;
+import br.unitins.topicos1.dto.Response.FornecedorResponseDTO;
+import br.unitins.topicos1.model.fornecedor.Fornecedor;
+import br.unitins.topicos1.model.telefone.Telefone;
 import br.unitins.topicos1.repository.FornecedorRepository;
+import br.unitins.topicos1.service.FornecedorService;
 import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

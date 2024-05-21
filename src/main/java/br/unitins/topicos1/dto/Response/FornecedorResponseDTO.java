@@ -1,6 +1,6 @@
-package br.unitins.topicos1.dto;
+package br.unitins.topicos1.dto.Response;
 
-import br.unitins.topicos1.model.Fornecedor;
+import br.unitins.topicos1.model.fornecedor.Fornecedor;
 
 public record FornecedorResponseDTO(
     Long id,  

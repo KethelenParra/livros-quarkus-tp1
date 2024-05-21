@@ -2,6 +2,7 @@ package br.unitins.topicos1.resource;
 
 import br.unitins.topicos1.dto.FornecedorDTO;
 import br.unitins.topicos1.service.FornecedorService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -26,46 +27,54 @@ public class FornecedorResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findById(@PathParam("id") Long id){
         return Response.ok(fornecedorService.findById(id)).build();
     }
 
     @GET
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findAll(){
         return Response.ok(fornecedorService.findAll()).build();
     }
 
     @GET
     @Path("/search/nome/{nome}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByNome(@PathParam("nome") String nome){
         return Response.ok(fornecedorService.findByNome(nome)).build();
     }
 
     @GET
     @Path("/search/estado/{estado}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByEstado(@PathParam("estado") String estado){
         return Response.ok(fornecedorService.findByEstado(estado)).build();
     }
 
     @GET
     @Path("/search/cidade/{cidade}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByCidade(@PathParam("cidade") String cidade){
         return Response.ok(fornecedorService.findByCidade(cidade)).build();
     }
 
     @GET
     @Path("/search/cnpj/{cnpj}")
+    @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByCnpj(@PathParam("cnpj") String cnpj){
         return Response.ok(fornecedorService.findByCnpj(cnpj)).build();
     }
 
     @POST
+    @RolesAllowed({"Funcionario"})
     public Response create(@Valid FornecedorDTO dto){
         return Response.status(Status.CREATED).entity(fornecedorService.create(dto)).build();
     }
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, FornecedorDTO dto){
         fornecedorService.update(id, dto);
         return Response.status(Status.NO_CONTENT).build();
@@ -73,6 +82,7 @@ public class FornecedorResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
         fornecedorService.delete(id);
         return Response.status(Status.NO_CONTENT).build();
