@@ -1,10 +1,10 @@
-package br.unitins.topicos1.dto;
+package br.unitins.topicos1.dto.Response;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import br.unitins.topicos1.model.Classificacao;
-import br.unitins.topicos1.model.Livro;
+import br.unitins.topicos1.model.Enum.Classificacao;
+import br.unitins.topicos1.model.livro.Livro;
 
 public record LivroResponseDTO (
                         Long id,

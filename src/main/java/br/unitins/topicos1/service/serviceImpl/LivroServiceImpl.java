@@ -1,16 +1,17 @@
-package br.unitins.topicos1.service;
+package br.unitins.topicos1.service.serviceImpl;
 
 import java.util.List;
 
 import br.unitins.topicos1.dto.LivroDTO;
-import br.unitins.topicos1.dto.LivroResponseDTO;
-import br.unitins.topicos1.model.Classificacao;
-import br.unitins.topicos1.model.Livro;
+import br.unitins.topicos1.dto.Response.LivroResponseDTO;
+import br.unitins.topicos1.model.Enum.Classificacao;
+import br.unitins.topicos1.model.livro.Livro;
 import br.unitins.topicos1.repository.AutorRepository;
 import br.unitins.topicos1.repository.EditoraRepository;
 import br.unitins.topicos1.repository.FornecedorRepository;
 import br.unitins.topicos1.repository.GeneroRepository;
 import br.unitins.topicos1.repository.LivroRepository;
+import br.unitins.topicos1.service.LivroService;
 import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
