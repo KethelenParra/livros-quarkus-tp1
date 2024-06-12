@@ -6,18 +6,24 @@ INSERT INTO telefone (codigoArea, numero) VALUES
 ('51', '5555'), ('32', '7757'), ('32', '7456'), ('87', '2203');
 
 INSERT INTO usuario (nome, username, dataNascimento, email, senha, id_telefone, sexo, cpf) 
-VALUES ('João Silva', 'Joao10', '1990-01-01', 'joao.silva@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 1, 1, '12345678901'),
-       ('Maria Souza', 'Maria20', '1995-03-15', 'maria.souza@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 2, 2, '98765432109'),
-       ('Carlos Oliveira', 'carlos30', '1988-05-20', 'carlos.oliveira@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 3, 1, '45678912365');
+VALUES ('João Silva', 'Joao10', '1990-01-01', 'joao.silva@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 11, 1, '12345678901'),
+       ('Maria Souza', 'Maria20', '1995-03-15', 'maria.souza@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 12, 2, '98765432109'),
+       ('Gabriel Mussatto', 'mussatin', '2003-04-08', 'gabrielmussatto@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 13, 1, '45678912365'),
+       ('Erick Menezes', 'ericin', '2004-06-20', 'erickmenezes@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 14, 1, '32568512495'),
+       ('Hugo Valuar', 'huguin', '2004-06-25', 'hugovaluar@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 15, 1, '95612435965'),
+       ('Kethelen Parra', 'Kethyn', '2003-12-22', 'kethelenparra@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 16, 1, '32652924563');
 
 -- Certifique-se de que os IDs dos usuários foram inseridos corretamente antes de continuar.
 
 INSERT INTO cliente (endereco, cep, cidade, estado, id_usuario) 
-VALUES ('Rua A, 123', '12345-678', 'São Paulo', 'SP', 1);
+VALUES ('Rua A, 123', '12345-678', 'São Paulo', 'SP', 1),
+       ('Rua A, 326', '96325-678', 'São Paulo', 'SP', 2),
+       ('Rua A, 159', '65485-678', 'Tocantins', 'TO', 3);
 
 INSERT INTO funcionario (cargo, salario, id_usuario) 
-VALUES ('Gerente', 5000.00, 2), 
-       ('Especialista em E-commerce', 3000.00, 3);
+VALUES ('Gerente', 5000.00, 4), 
+       ('Especialista em E-commerce', 3000.00, 5),
+       ('Estagiario', 2500.00, 6);
 
 -- Inserir autores
 INSERT INTO autor (nome, biografia) VALUES ('Colleen Hoover', 'Colleen Hoover é uma escritora norte-americana que escreve principalmente romances nos gêneros romântico e ficção para jovens adultos. Muitos de seus trabalhos foram autopublicados antes de serem adquiridos por uma editora.');
@@ -78,3 +84,29 @@ INSERT INTO livro_genero (idlivro, idgenero) VALUES (3, 2);
 INSERT INTO livro_genero (idlivro, idgenero) VALUES (4, 4);
 INSERT INTO livro_genero (idlivro, idgenero) VALUES (5, 2);
 INSERT INTO livro_genero (idlivro, idgenero) VALUES (6, 1);
+
+-- Correto
+INSERT INTO avaliacao (dataAvaliacao, estrela, id_livro, id_cliente) VALUES ('2023-01-22', 3, 1, 1);
+INSERT INTO avaliacao (dataAvaliacao, estrela, id_livro, id_cliente, comentario)
+                     VALUES ('2022-11-09', 4, 3, 2, 'muito legal');
+INSERT INTO avaliacao (dataAvaliacao, estrela, id_livro, id_cliente) VALUES ('2023-02-08', 1, 2, 1);
+
+
+INSERT INTO formaPagamento (valor, confirmacaoPagamento, dataPagamento) VALUES (511, true, '2023-06-10');
+INSERT INTO formaPagamento (valor, confirmacaoPagamento, dataPagamento) VALUES (140.25, true, '2023-06-15');
+
+INSERT INTO pix (nome, cpf, dataExpiracaoTokenPix, id) VALUES ('Maria Souza', '98765432109', '2023-06-11', 1);
+INSERT INTO boleto (id, nome, cpf, dataGeracaoBoleto, dataVencimento)
+            VALUES (2, 'Maria Souza', '98765432109', '2023-06-15', '2023-06-25');
+
+INSERT INTO pedido (dataPedido, valorTotal, ifPedidoFeito, id_formaPagamento, id_cliente)
+            VALUES ('2023-06-10', 511, true, 1, 2);
+
+INSERT INTO pedido (dataPedido, valorTotal, ifPedidoFeito,  id_formaPagamento, id_cliente)
+            VALUES ('2023-06-15', 140.25, true, 2, 2);
+
+INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (3.00, 10, 39.90, 1);
+INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (2.35, 5, 29.99, 2);
+INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (3.60, 15, 39.90, 1);
+INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (4.50, 2, 34.90, 3);
+INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (5.00, 20, 29.99, 2);
