@@ -85,28 +85,33 @@ INSERT INTO livro_genero (idlivro, idgenero) VALUES (4, 4);
 INSERT INTO livro_genero (idlivro, idgenero) VALUES (5, 2);
 INSERT INTO livro_genero (idlivro, idgenero) VALUES (6, 1);
 
--- Correto
+-- Avaliacao
 INSERT INTO avaliacao (dataAvaliacao, estrela, id_livro, id_cliente) VALUES ('2023-01-22', 3, 1, 1);
 INSERT INTO avaliacao (dataAvaliacao, estrela, id_livro, id_cliente, comentario)
                      VALUES ('2022-11-09', 4, 3, 2, 'muito legal');
 INSERT INTO avaliacao (dataAvaliacao, estrela, id_livro, id_cliente) VALUES ('2023-02-08', 1, 2, 1);
 
-
+-- forma de pagamento
 INSERT INTO formaPagamento (valor, confirmacaoPagamento, dataPagamento) VALUES (511, true, '2023-06-10');
 INSERT INTO formaPagamento (valor, confirmacaoPagamento, dataPagamento) VALUES (140.25, true, '2023-06-15');
 
+-- pix
 INSERT INTO pix (nome, cpf, dataExpiracaoTokenPix, id) VALUES ('Maria Souza', '98765432109', '2023-06-11', 1);
+
+-- boleto
 INSERT INTO boleto (id, nome, cpf, dataGeracaoBoleto, dataVencimento)
             VALUES (2, 'Maria Souza', '98765432109', '2023-06-15', '2023-06-25');
 
+-- pedido
 INSERT INTO pedido (dataPedido, valorTotal, ifPedidoFeito, id_formaPagamento, id_cliente)
             VALUES ('2023-06-10', 511, true, 1, 2);
 
-INSERT INTO pedido (dataPedido, valorTotal, ifPedidoFeito,  id_formaPagamento, id_cliente)
+INSERT INTO pedido (dataPedido, valorTotal, ifPedidoFeito, id_formaPagamento, id_cliente)
             VALUES ('2023-06-15', 140.25, true, 2, 2);
 
-INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (3.00, 10, 39.90, 1);
-INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (2.35, 5, 29.99, 2);
-INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (3.60, 15, 39.90, 1);
-INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (4.50, 2, 34.90, 3);
-INSERT INTO itemPedido (desconto, quantidade, valor, id_livro) VALUES (5.00, 20, 29.99, 2);
+-- itemPedido
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (3.00, 10, 0.0, 1);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (2.35, 5, 0.0, 2);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (3.60, 15, 0.0, 1);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (4.50, 2, 0.0, 3);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (5.00, 20, 0.0, 2);
