@@ -20,6 +20,16 @@ public class Autor extends DefaultEntity{
     @ManyToMany(mappedBy = "listaAutor")
     private List<Livro> listaLivros;
 
+    private String nomeImagem;
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
+
     public String getNome() {
         return nome;
     }
