@@ -6,7 +6,7 @@ public record AlterarUsernameDTO(
     @NotBlank(message = "senha não pode ser nulo")
     String senha,
 
-    @NotBlank(message = "susername não pode ser nulo" )
+    @NotBlank(message = "usarname não pode ser nulo" )
     String usernameNovo
 ) {}  
 
