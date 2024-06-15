@@ -58,6 +58,8 @@ public class Livro extends DefaultEntity{
     )
     private List<Autor> listaAutor;
 
+    private String nomeImagem;
+
     @ManyToMany
     @JoinTable(
         name = "livro_genero",
@@ -66,10 +68,13 @@ public class Livro extends DefaultEntity{
     )
     private List<Genero> listaGenero;
 
+    public void diminuindoEstoque(Integer quantidadeEstoque) {
+        this.quantidadeEstoque -= quantidadeEstoque;
+    }
+
     public String getTitulo() {
         return titulo;
     }
-
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -170,6 +175,14 @@ public class Livro extends DefaultEntity{
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
 }

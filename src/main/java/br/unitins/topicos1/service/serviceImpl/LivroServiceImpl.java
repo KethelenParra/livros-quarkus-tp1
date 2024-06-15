@@ -67,6 +67,9 @@ public class LivroServiceImpl implements LivroService{
     public void update(Long id, LivroDTO dto){
         Livro livroBanco = livroRepository.findById(id);
 
+        if(livroBanco == null)
+            throw new ValidationException("id", "Livro não encontrado.");
+
         livroBanco.setTitulo(dto.titulo());
         livroBanco.setQuantidadeEstoque(dto.quantidadeEstoque());
         livroBanco.setIsbn(dto.isbn());
@@ -83,6 +86,8 @@ public class LivroServiceImpl implements LivroService{
     @Override
     @Transactional
     public void delete(Long id){
+        if (id == null)
+           throw new ValidationException("id", "Id não pode ser nulo.");
         livroRepository.deleteById(id);
     }
 
