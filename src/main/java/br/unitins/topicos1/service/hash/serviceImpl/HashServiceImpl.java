@@ -38,6 +38,19 @@ public class HashServiceImpl implements HashService {
         System.out.println(hash.getHashSenha("123"));
         System.out.println(hash.getHashSenha("123"));
         System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+        System.out.println(hash.getHashSenha("123"));
+   }
+
+    @Override
+    public boolean verificandoHash(String senha, String hash){
+        return getHashSenha(senha).equals(hash);
     }
 
 }
