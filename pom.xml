@@ -57,7 +57,7 @@
       <artifactId>quarkus-hibernate-orm</artifactId>
     </dependency>
     <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-hibernate-validator -->
- <dependency>
+    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-validator</artifactId>
     </dependency>
@@ -72,7 +72,7 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
+      <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-jwt</artifactId>
     </dependency>
@@ -85,6 +85,12 @@
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-multipart-provider</artifactId>
+    </dependency>
+
+    <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-test-security</artifactId>
+            <scope>test</scope>
     </dependency>
 
   </dependencies>
