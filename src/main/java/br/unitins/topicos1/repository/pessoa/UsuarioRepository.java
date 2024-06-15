@@ -19,4 +19,9 @@ public class UsuarioRepository implements PanacheRepository<Usuario>{
     public Usuario findByCpfUsuario(String cpf){
         return find("cpf LIKE ?1", "%" + cpf + "%").firstResult();
     }
+
+    public Usuario findById(Long id){
+        return find("id", id).firstResult();
+    }
+
 }
