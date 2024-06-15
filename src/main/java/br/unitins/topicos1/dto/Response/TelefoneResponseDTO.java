@@ -7,6 +7,9 @@ public record TelefoneResponseDTO(
     String numero
 ) {
     public static TelefoneResponseDTO valueOf(Telefone telefone){
+        if(telefone == null){
+            return null;
+        }
         return new TelefoneResponseDTO(
             telefone.getCodigoArea(), 
             telefone.getNumero());

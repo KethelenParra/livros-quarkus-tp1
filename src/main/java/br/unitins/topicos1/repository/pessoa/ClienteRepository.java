@@ -37,7 +37,7 @@ public class ClienteRepository implements PanacheRepository<Cliente>{
         if (username == null){
             return null;
         }
-        return find("usuario.username = ?1", username).firstResult();
+        return find("usuario.username", username).firstResult();
     }
 
     public Cliente findById(Long id){

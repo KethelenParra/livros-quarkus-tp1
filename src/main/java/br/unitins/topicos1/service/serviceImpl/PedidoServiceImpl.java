@@ -26,6 +26,7 @@ import br.unitins.topicos1.repository.PixRepository;
 import br.unitins.topicos1.repository.pessoa.ClienteRepository;
 import br.unitins.topicos1.service.PedidoService;
 import br.unitins.topicos1.validation.ValidationException;
+import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -55,17 +56,25 @@ public class PedidoServiceImpl implements PedidoService {
     public CartaoCreditoRepository cartaoCreditoRepository;
 
     @Inject
+    SecurityIdentity securityIdentity;
+
+    @Inject
     JsonWebToken tokenJwt;
 
     @Override
     @Transactional
     public PedidoResponseDTO create(PedidoDTO dto) {
-           
+        String username = securityIdentity.getPrincipal().getName();   
+
         Cliente cliente = clienteRepository.findById(dto.idCliente());
         if (cliente == null) {
             throw new ValidationException("Buscando Cliente", "Cliente não encontrado");
         }
                 
+        if(!clienteAutenticado(username, dto.idCliente())){
+            throw new ValidationException("Verificando...", "Você não tem autorização para realizar o pedido.");
+        }
+
         Pedido pedido = new Pedido();
                 
         pedido.setDataPedido(LocalDateTime.now());

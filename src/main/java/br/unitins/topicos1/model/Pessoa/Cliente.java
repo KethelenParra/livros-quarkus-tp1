@@ -1,7 +1,6 @@
 package br.unitins.topicos1.model.Pessoa;
 
 import br.unitins.topicos1.model.defaultEntity.DefaultEntity;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -12,11 +11,8 @@ public class Cliente extends DefaultEntity {
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
-    
-    @Column(nullable = false)
+
     private String cep;
-    
-    @Column(nullable = false)
     private String endereco;
     private String estado; 
     private String cidade;

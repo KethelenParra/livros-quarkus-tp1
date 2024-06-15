@@ -19,10 +19,9 @@ public class Usuario extends DefaultEntity {
     @Column(unique = true)
     private String username;
 
-    @Column(nullable = false)
     private LocalDate dataNascimento;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -32,10 +31,8 @@ public class Usuario extends DefaultEntity {
     @JoinColumn(name = "id_telefone")
     private Telefone telefone;
 
-    @Column(nullable = false)
     private Sexo sexo;
     
-    @Column(nullable = false)
     private String cpf;
 
     public String getNome() {

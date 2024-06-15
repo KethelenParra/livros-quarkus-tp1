@@ -7,8 +7,8 @@ public record ItemPedidoResponseDTO(
     String titulo,
     Double preco,
     Integer quantidade,
-    Double desconto,
-    Double subTotal
+    String desconto,
+    String subTotal
 ) {
     public static ItemPedidoResponseDTO valueOf(ItemPedido item) {
         return new ItemPedidoResponseDTO(
@@ -16,8 +16,8 @@ public record ItemPedidoResponseDTO(
             item.getLivro().getTitulo(), 
             item.getLivro().getPreco(),
             item.getQuantidade(),
-            item.getDesconto(),
-            item.getSubTotal()
+            "R$" + String.format("%.2f", item.getDesconto()),
+            "R$" + String.format("%.2f", item.getSubTotal())
         );
     }
 }
