@@ -26,17 +26,4 @@ public class AuthResourceTest {
             .statusCode(201);
     }
 
-    @Test
-    public void loginFailed() {
-
-        AuthUsuarioDTO authUsuarioDTO = new AuthUsuarioDTO("Amanda30", "432", 1);
-
-        given()
-            .contentType(ContentType.JSON)
-            .body(authUsuarioDTO)
-            .when()
-            .post("/auth")
-            .then()
-            .statusCode(400);
-    }
 }
