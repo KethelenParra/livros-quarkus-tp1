@@ -20,4 +20,16 @@ public class FuncionarioRepository implements PanacheRepository<Funcionario>{
        return find("usuario.username = ?1 AND usuario.senha = ?2", username, senha).firstResult(); 
     }
 
+    public Funcionario findByUsername(String username) {
+
+        if (username == null){
+            return null;
+        }
+        return find("usuario.username = ?1", username).firstResult();
+    }
+
+    public Funcionario findById(Long id){
+        return find("usuario.id", id).firstResult();
+    }
+
 }

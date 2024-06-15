@@ -2,6 +2,11 @@ package br.unitins.topicos1.service.serviceImpl;
 
 import java.util.List;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
+import br.unitins.topicos1.dto.AlterarEmailDTO;
+import br.unitins.topicos1.dto.AlterarSenhaDTO;
+import br.unitins.topicos1.dto.AlterarUsernameDTO;
 import br.unitins.topicos1.dto.FuncionarioDTO;
 import br.unitins.topicos1.dto.TelefoneDTO;
 import br.unitins.topicos1.dto.Response.FuncionarioResponseDTO;
@@ -31,6 +36,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     public UsuarioRepository usuarioRepository;
 
     @Inject
+    private JsonWebToken tokenJwt;
+
+    @Inject
     public HashService hashService;
 
     @Override
@@ -38,30 +46,25 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     public FuncionarioResponseDTO create(@Valid FuncionarioDTO dto) {
         validarCpfFuncionario(dto.cpf());
 
-        // Criar uma instância de Usuario com os dados do FuncionarioDTO
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
         usuario.setUsername(dto.username());
-        usuario.setSenha(hashService.getHashSenha(dto.senha())); // gerando o hash da senha
+        usuario.setSenha(hashService.getHashSenha(dto.senha()));
         usuario.setDataNascimento(dto.dataNascimento());
         usuario.setEmail(dto.email());
         usuario.setCpf(dto.cpf());
         usuario.setSexo(Sexo.valueOf(dto.idSexo()));
         usuario.setTelefone(TelefoneDTO.convertToTelefone(dto.telefone()));
 
-        // Persistir o Usuario no banco de dados antes de associá-lo ao Funcionario
         usuarioRepository.persist(usuario);
 
-        // Criar uma instância de Funcionario com os dados do FuncionarioDTO
         Funcionario funcionario = new Funcionario();
         funcionario.setCargo(dto.cargo());
         funcionario.setSalario(dto.salario());
         funcionario.setUsuario(usuario);
 
-        // Persistir o Funcionario no banco de dados
         funcionarioRepository.persist(funcionario);
 
-        // Retornar uma representação do funcionário criado
         return FuncionarioResponseDTO.valueOf(funcionario);
     }
 
@@ -75,15 +78,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Transactional
     public void update(Long id, FuncionarioDTO dto) {
         Funcionario funcionarioBanco = funcionarioRepository.findById(id);
+        
         if (funcionarioBanco == null) {
             throw new NotFoundException("Funcionário não encontrado");
         }
 
-        // Atualiza os dados do funcionário
         funcionarioBanco.setCargo(dto.cargo());
         funcionarioBanco.setSalario(dto.salario());
 
-        // Atualiza os dados do usuário associado ao funcionário
         Usuario usuario = funcionarioBanco.getUsuario();
         usuario.setNome(dto.nome());
         usuario.setUsername(dto.username());
@@ -94,8 +96,6 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         usuario.setSexo(Sexo.valueOf(dto.idSexo()));
         usuario.setTelefone(TelefoneDTO.convertToTelefone(dto.telefone()));
 
-        // Não é necessário persistir o usuário novamente, pois ele já está no banco de
-        // dados
     }
 
     @Override
@@ -106,7 +106,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public FuncionarioResponseDTO findById(Long id) {
-        return FuncionarioResponseDTO.valueOf(funcionarioRepository.findById(id));
+        Funcionario funcionario = funcionarioRepository.findById(id);
+        if (funcionario == null) {
+            throw new NotFoundException("Funcionário não encontrado");
+        }
+
+        return FuncionarioResponseDTO.valueOf(funcionario);
     }
 
     @GET
@@ -129,5 +134,63 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     public UsuarioResponseDTO login(String username, String senha) {
         Funcionario funcionario = funcionarioRepository.findByUsernameAndSenha(username, senha);
         return UsuarioResponseDTO.valueOf(funcionario.getUsuario());
+    }
+
+    @Override
+    @Transactional
+    public void alterarSenha(AlterarSenhaDTO dto) {
+        Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
+
+        Funcionario funcionario = funcionarioRepository.findById(usuario.getId());
+
+        if(funcionario == null || !hashService.verificandoHash(dto.senhaAntiga(), funcionario.getUsuario().getSenha())){
+            throw new ValidationException("senhaAntiga", "Senha antiga não confere");
+        }
+
+        funcionario.getUsuario().setSenha(hashService.getHashSenha(dto.novaSenha()));
+        usuarioRepository.persist(funcionario.getUsuario());
+    }
+
+    @Override
+    @Transactional
+    public void alterarUsername(AlterarUsernameDTO dto) {
+        Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
+
+        Funcionario funcionario = funcionarioRepository.findById(usuario.getId());
+
+        if (funcionario == null || !hashService.verificandoHash(dto.senha(), funcionario.getUsuario().getSenha())) {
+            throw new ValidationException("senhaAntiga", "Senha incorreta");
+        }
+
+        funcionario.getUsuario().setUsername(dto.usernameNovo());
+        usuarioRepository.persist(funcionario.getUsuario());
+    }
+
+    @Override
+    @Transactional
+    public void alterarEmail(AlterarEmailDTO dto) {
+        Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
+
+        Funcionario funcionario = funcionarioRepository.findById(usuario.getId());
+
+        if (funcionario == null || !hashService.verificandoHash(dto.senha(), funcionario.getUsuario().getSenha())) {
+            throw new ValidationException("senhaAntiga", "Senha incorreta");
+        }
+
+        funcionario.getUsuario().setEmail(dto.emailNovo());
+        usuarioRepository.persist(funcionario.getUsuario());
+    }
+
+    @Override
+    @Transactional
+    public FuncionarioResponseDTO findMeuPerfil() {
+         Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
+
+         Funcionario funcionario = funcionarioRepository.findById(usuario.getId());
+
+        if (funcionario == null) {
+            throw new ValidationException("Perfil","Cliente não encontrado");
+        }
+        return FuncionarioResponseDTO.valueOf(funcionario);
     }
 }
