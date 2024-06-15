@@ -1,5 +1,7 @@
 package br.unitins.topicos1.resource;
 
+import org.jboss.logging.Logger;
+
 import br.unitins.topicos1.dto.GeneroDTO;
 import br.unitins.topicos1.service.GeneroService;
 import jakarta.annotation.security.RolesAllowed;
@@ -24,52 +26,77 @@ public class GeneroResource {
     @Inject
     public GeneroService generoService;
 
+    private static final Logger LOG = Logger.getLogger(GeneroResource.class);
+
     @GET
     @Path("/{id}")
-    @RolesAllowed({"Funcionario", "Cliente"})
+    @RolesAllowed({"Funcionario"})
     public Response findById(@PathParam("id") Long id){
+        LOG.info("Executando o findById");
+        LOG.infof("Executando o método findById. Id: %s", id.toString());
         return Response.ok(generoService.findById(id)).build();
     }
 
     @GET
-    @RolesAllowed({"Funcionario", "Cliente"})
+    @RolesAllowed({"Funcionario"})
     public Response findAll(){
+        LOG.info("Buscando todos os generos, findAll");
         return Response.ok(generoService.findAll()).build();
     }
 
     @GET
     @Path("/search/nome/{nome}")
-    @RolesAllowed({"Funcionario", "Cliente"})
+    @RolesAllowed({"Funcionario"})
     public Response findByNome(@PathParam("nome") String nome){
+        LOG.info("Buscando os generos pelo nome, findByNome");
         return Response.ok(generoService.findByNome(nome)).build();
     }
 
     @GET
     @Path("/search/descricao/{descricao}")
-    @RolesAllowed({"Funcionario", "Cliente"})
+    @RolesAllowed({"Funcionario"})
     public Response findByDescricao(@PathParam("descricao") String descricao){
+        LOG.info("Buscando os generos pela descricao, findByDescricao");
         return Response.ok(generoService.findByDescricao(descricao)).build();
     }
 
     @POST
     @RolesAllowed({"Funcionario"})
     public Response create (GeneroDTO dto){
-        return Response.status(Status.CREATED).entity(generoService.create(dto)).build();
+        try {
+            LOG.info("Criando um novo genero, create");
+            return Response.status(Status.CREATED).entity(generoService.create(dto)).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao criar um novo genero", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao criar um novo genero").build();
+        }
     }
 
     @PUT
     @Path("/{id}")
     @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, GeneroDTO dto){
-        generoService.update(id, dto);
-        return Response.status(Status.NO_CONTENT).build();
+        try {
+            LOG.info("Atualizando um genero, update");
+            generoService.update(id, dto);
+            return Response.status(Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao atualizar um genero", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar um genero").build();
+        }
     }
 
     @DELETE
     @Path("/{id}")
     @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
-        generoService.delete(id);
-        return Response.status(Status.NO_CONTENT).build();
+        try {
+            LOG.info("Deletando um genero, delete");
+            generoService.delete(id);
+            return Response.status(Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            LOG.error("Erro ao deletar um genero", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar um genero").build();
+        }
     }    
 }
