@@ -1,7 +1,6 @@
 package br.unitins.topicos1.resource;
 import org.junit.jupiter.api.Test;
 
-import br.unitins.topicos1.dto.AlterarEmailDTO;
 import br.unitins.topicos1.dto.AlterarSenhaDTO;
 import br.unitins.topicos1.dto.AlterarUsernameDTO;
 import br.unitins.topicos1.dto.ClienteDTO;
@@ -152,21 +151,7 @@ public class ClienteResourceTest {
             .then()
             .statusCode(204);
     }
-/*
-    @Test
-    public void alterarEmailTest() {
-        AlterarEmailDTO dto = new AlterarEmailDTO("123", "novoemail@gmail.com");
-       login: Juliana 
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1bml0aW5zLWp3dCIsImlkIjo1LCJzdWIiOiJqdWxpYW5hc2FudG9zIiwiZ3JvdXBzIjpbIkNsaWVudGUiXSwiZXhwIjoxNzQ5OTQ5NzI0LCJpYXQiOjE3MTg0MTM3MjQsImp0aSI6IjNkMjZjMmIyLWUzNGEtNGQ3My05Y2U1LTkwOTZjN2JiM2ZkZiJ9.a0vFnlyWQi47IKgRof0LVvGANBA1dekmYW8qLS9CVALabxNCSupo3pb3fE_Ne41c5j_pSe6T4YkRpa-7WizYw2j9runz5b2N0P0jyqB8eCjLO9iaQZxde97HIPFEW030uDRp7WJLStMbUGnihMHi9FnfC1U7NyfFXJM4ZOs4v52tv7MJkpWgZXm_kU6nuGLBeO8Y08oSxTYjKEavD2lf_7CemZx5f-s9FVKVx-aKl_9_ORsRi4Vw81b4ZbnG_CMuZXNU2_Ydthc5wDuRhepp85P4_z9RhvfVDMkmQ5cX731SkQAaKcuPZitTmklna5XrDWKw12DIuZN70lLBjUM2kw";
-        given()
-            .header("Authorization", "Bearer " + token)
-            .body(dto)
-            .when()
-            .patch("/clientes/search/alterar-email")
-            .then()
-            .statusCode(204);
-    }
-*/
+
     @Test
     public void alterarUsernameTest() {
         AlterarUsernameDTO dto = new AlterarUsernameDTO("321", "novoUsername");
