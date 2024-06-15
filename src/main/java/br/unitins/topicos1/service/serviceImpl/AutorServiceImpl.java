@@ -43,6 +43,10 @@ public class AutorServiceImpl implements AutorService{
     public void update(Long id, AutorDTO dto){
         Autor autorBanco = autorRepository.findById(id);
 
+        if(autorBanco == null){
+            throw new ValidationException("id", "O autor não existe.");
+        }
+
         autorBanco.setNome(dto.nome());
         autorBanco.setBiografia(dto.biografia());
     }
@@ -50,11 +54,17 @@ public class AutorServiceImpl implements AutorService{
     @Override
     @Transactional
     public void delete(Long id){
+        if (id == null) {
+            throw new ValidationException("id", "Nenhum autor encontrado");
+        }
         autorRepository.deleteById(id);
     }
 
     @Override
     public AutorResponseDTO findById(Long id){
+        if (id == null) {
+            throw new ValidationException("id", "Nenhum autor encontrado");
+        }
         return AutorResponseDTO.valueOf(autorRepository.findById(id));
     }
 
@@ -65,11 +75,17 @@ public class AutorServiceImpl implements AutorService{
 
     @Override
     public List<AutorResponseDTO> findByNome(String nome){
+        if (nome == null) {
+            throw new ValidationException("nome", "Nenhum autor encontrado");            
+        }
         return autorRepository.findByNome(nome).stream().map(autor -> AutorResponseDTO.valueOf(autor)).toList();
     }
 
     @Override
     public List<AutorResponseDTO> findByBiografia(String biografia){
+        if (biografia == null) {
+            throw new ValidationException("biografia", "Nenhum biografia encontrada");
+        }
         return autorRepository.findByBiografia(biografia).stream().map(autor -> AutorResponseDTO.valueOf(autor)).toList();
     }
 
