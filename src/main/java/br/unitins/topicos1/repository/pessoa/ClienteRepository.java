@@ -12,13 +12,36 @@ public class ClienteRepository implements PanacheRepository<Cliente>{
         return find("UPPER(estado) LIKE ?1", "%" + estado.toUpperCase() + "%").list();
     }
 
+    public List<Cliente> findByNome(String nome){
+
+        if(nome == null){
+            return null;
+        }
+        return find("UPPER(usuario.nome) LIKE ?1", "%" + nome.toUpperCase() + "%").list();
+    }
+
     public Cliente findByEstadoCliente(String estado){
         return find("UPPER(estado) LIKE ?1", "%" + estado.toUpperCase() ).firstResult();
     }
 
     public Cliente findByUsernameAndSenha(String username, String senha) {
+        if(username == null || senha == null){
+            return null;
+        }
+
         return find("usuario.username = ?1 AND usuario.senha = ?2", username, senha).firstResult();
     }
-    
-    
+
+    public Cliente findByUsername(String username) {
+
+        if (username == null){
+            return null;
+        }
+        return find("usuario.username = ?1", username).firstResult();
+    }
+
+    public Cliente findById(Long id){
+        return find("usuario.id", id).firstResult();
+    }
+
 }
