@@ -57,12 +57,17 @@ public class EditoraServiceImpl implements EditoraService {
             Telefone telefone = editoraBanco.getTelefone();
             telefone.setCodigoArea(dto.telefone().codigoArea());
             telefone.setNumero(dto.telefone().numero());
+        } else{
+            throw new ValidationException("id", "Editora não encontrado.");
         }
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
+        if (id == null)
+            throw new ValidationException("id", "Editora não encontrado.");
+            
         editoraRepository.deleteById(id);
     }
 
