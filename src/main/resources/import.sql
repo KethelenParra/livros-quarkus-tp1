@@ -1,29 +1,43 @@
 -- Inserir telefone
 INSERT INTO telefone (codigoArea, numero) VALUES 
-('62', '123'), ('63', '321'), ('91', '352'), ('63', '958'), 
-('62', '654'), ('91', '533'), ('15', '245'), ('67', '235'), 
-('55', '175'), ('56', '745'), ('31', '7777'), ('41', '6666'), 
-('51', '5555'), ('32', '7757'), ('32', '7456'), ('87', '2203');
+('63', '95832165'), ('62', '65478912'), ('91', '53315987'), ('15', '24578563'), ('67', '23547896'), 
+('55', '17589632'), ('56', '74512365'), ('31', '77771234'), ('41', '66669874'), ('51', '55558796'), 
+('32', '77574125'), ('32', '74569823'), ('87', '22038745'), ('11', '12345678'), ('21', '87654321'), 
+('31', '98765432'), ('41', '23456789'), ('51', '87654321'), ('61', '98765432'), ('71', '23456789'), 
+('81', '87654321');
+
 
 INSERT INTO usuario (nome, username, dataNascimento, email, senha, id_telefone, sexo, cpf) 
-VALUES ('João Silva', 'Joao10', '1990-01-01', 'joao.silva@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 11, 1, '12345678901'),
-       ('Maria Souza', 'Maria20', '1995-03-15', 'maria.souza@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 12, 2, '98765432109'),
-       ('Gabriel Mussatto', 'mussatin', '2003-04-08', 'gabrielmussatto@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 13, 1, '45678912365'),
-       ('Erick Menezes', 'ericin', '2004-06-20', 'erickmenezes@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 14, 1, '32568512495'),
-       ('Hugo Valuar', 'huguin', '2004-06-25', 'hugovaluar@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 15, 1, '95612435965'),
-       ('Kethelen Parra', 'Kethyn', '2003-12-22', 'kethelenparra@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 16, 1, '32652924563');
+VALUES 
+('João Silva', 'Joao10', '1990-01-01', 'joao.silva@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 1, 1, '12345678901'),
+('Maria Souza', 'Maria20', '1995-03-15', 'maria.souza@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 2, 2, '98765432109'),
+('Ana Carolina Oliveira', 'anaoliveira', '1992-08-10', 'ana.oliveira@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 11, 2, '78945612385'),
+('Rafael Souza', 'rafaelsouza', '1990-05-15', 'rafael.souza@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 3, 1, '15975346820'),
+('Juliana Santos', 'julianasantos', '1994-11-20', 'juliana.santos@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 4, 2, '35715924680'),
 
--- Certifique-se de que os IDs dos usuários foram inseridos corretamente antes de continuar.
+('Rodrigo Oliveira', 'rodrigooliveira', '1985-03-05', 'rodrigo.oliveira@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 5, 1, '45698732100'),
+('Leticia Alves', 'leticialves', '1998-09-12', 'leticia.alves@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 6, 2, '85236974100'),
+('Amanda Oliveira', 'Amanda30', '1998-07-10', 'amanda.oliveira@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 7, 2, '85479632105'),
+('Pedro Almeida', 'Pedrinho40', '2000-09-05', 'pedro.almeida@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 8, 1, '14785236987'),
+('Lucas Fernandes', 'Luquinhas50', '1999-11-18', 'lucas.fernandes@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 9, 1, '36985214765'),
+('Isabela Santos', 'Belinha60', '1997-04-30', 'isabela.santos@gmail.com', 'TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 10, 2, '25874196385');
+
 
 INSERT INTO cliente (endereco, cep, cidade, estado, id_usuario) 
-VALUES ('Rua A, 123', '12345-678', 'São Paulo', 'SP', 1),
-       ('Rua A, 326', '96325-678', 'São Paulo', 'SP', 2),
-       ('Rua A, 159', '65485-678', 'Tocantins', 'TO', 3);
+VALUES ('Av. Paulista, 1000', '01310-100', 'São Paulo', 'SP', 1),
+       ('Rua da Lapa, 200', '20021-180', 'Rio de Janeiro', 'RJ', 2),
+       ('Rua Augusta, 300', '01305-001', 'São Paulo', 'SP', 3),
+       ('Rua das Flores, 400', '78010-000', 'Cuiabá', 'MT', 4),
+       ('Av. Tocantins, 500', '77015-002', 'Palmas', 'TO', 5);
 
 INSERT INTO funcionario (cargo, salario, id_usuario) 
-VALUES ('Gerente', 5000.00, 4), 
-       ('Especialista em E-commerce', 3000.00, 5),
-       ('Estagiario', 2500.00, 6);
+VALUES ('Analista de Sistemas', 6000.00, 6), 
+       ('Desenvolvedor Full Stack', 4500.00, 7),
+       ('Analista de Suporte', 4000.00, 8),
+       ('Estagiário de TI', 2500.00, 9),
+       ('Estagiário de TI', 2500.00, 10),
+       ('Estagiária de Marketing', 2500.00, 11);
+
 
 -- Inserir autores
 INSERT INTO autor (nome, biografia) VALUES ('Colleen Hoover', 'Colleen Hoover é uma escritora norte-americana que escreve principalmente romances nos gêneros romântico e ficção para jovens adultos. Muitos de seus trabalhos foram autopublicados antes de serem adquiridos por uma editora.');
@@ -42,18 +56,18 @@ INSERT INTO genero (nome, descricao) VALUES ('Mistério', 'Gênero literário qu
 INSERT INTO genero (nome, descricao) VALUES ('Aventura', 'Gênero literário que narra histórias emocionantes e cheias de ação, muitas vezes envolvendo viagens, descobertas e desafios perigosos.');
 
 -- Inserir fornecedores
-INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Loja Moderna Ltda', '11.222.333/0001-99', '123456789', 'moderna@gmail.com', 'Av. Paulista, 1000 - Bela Vista', '01311-000', 'São Paulo', 'São Paulo', 300, 1);
-INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Companhia das Letras Ltda', '55.444.666/0001-88', '987654321', 'letras@gmail.com', 'Rua Major Maragliano, 466 - Vila Mariana', '04015-001', 'São Paulo', 'São Paulo', 400, 2);
-INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Sextante Ltda', '99.777.333/0001-55', '123654987', 'sextante@gmail.com', 'Rua Voluntários da Pátria, 41 - Botafogo', '22270-000', 'Rio de Janeiro', 'Rio de Janeiro', 350, 3);
-INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Livraria Cultura Ltda', '88.999.777/0001-66', '456123789', 'cultura@gmail.com', 'Av. Paulista, 2300 - Bela Vista', '01310-300', 'São Paulo', 'São Paulo', 500, 4);
-INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Saraiva S.A.', '77.666.555/0001-44', '789456123', 'saraiva@gmail.com', 'Rua Henrique Schaumann, 270 - Pinheiros', '05413-000', 'São Paulo', 'São Paulo', 450, 5);
-INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Editora Abril Ltda', '66.555.444/0001-33', '654987321', 'abril@gmail.com', 'Av. das Nações Unidas, 7221 - Pinheiros', '05425-070', 'São Paulo', 'São Paulo', 550, 6);
+INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Loja Moderna Ltda', '11.222.333/0001-99', '123456789', 'moderna@gmail.com', 'Av. Paulista, 1000 - Bela Vista', '01311-000', 'São Paulo', 'São Paulo', 300, 12);
+INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Companhia das Letras Ltda', '55.444.666/0001-88', '987654321', 'letras@gmail.com', 'Rua Major Maragliano, 466 - Vila Mariana', '04015-001', 'São Paulo', 'São Paulo', 400, 13);
+INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Sextante Ltda', '99.777.333/0001-55', '123654987', 'sextante@gmail.com', 'Rua Voluntários da Pátria, 41 - Botafogo', '22270-000', 'Rio de Janeiro', 'Rio de Janeiro', 350, 14);
+INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Livraria Cultura Ltda', '88.999.777/0001-66', '456123789', 'cultura@gmail.com', 'Av. Paulista, 2300 - Bela Vista', '01310-300', 'São Paulo', 'São Paulo', 500, 15);
+INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Saraiva S.A.', '77.666.555/0001-44', '789456123', 'saraiva@gmail.com', 'Rua Henrique Schaumann, 270 - Pinheiros', '05413-000', 'São Paulo', 'São Paulo', 450, 16);
+INSERT INTO fornecedor (nome, cnpj, inscricaoEstadual, email, endereco, cep, estado, cidade, quantLivrosFornecido, id_telefone) VALUES ('Editora Abril Ltda', '66.555.444/0001-33', '654987321', 'abril@gmail.com', 'Av. das Nações Unidas, 7221 - Pinheiros', '05425-070', 'São Paulo', 'São Paulo', 550, 17);
 
 -- Inserir editora
-INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Atria Books', 'atriabooks@gmail.com', 'rua 10', 'nova york', 10);
-INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Globo Livros', 'globolivros@gmail.com', 'Av. Sete de Setembro, 550 - Centro', 'Rio de Janeiro', 7);
-INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Intrínseca', 'intrinseca@gmail.com', 'Rua Marquês de São Vicente, 99 - Gávea', 'Rio de Janeiro', 8);
-INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Editora Rocco', 'rocco@gmail.com', 'Rua Argentina, 171 - São Cristóvão', 'Rio de Janeiro', 9);
+INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Atria Books', 'atriabooks@gmail.com', 'rua 10', 'nova york', 18);
+INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Globo Livros', 'globolivros@gmail.com', 'Av. Sete de Setembro, 550 - Centro', 'Rio de Janeiro', 19);
+INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Intrínseca', 'intrinseca@gmail.com', 'Rua Marquês de São Vicente, 99 - Gávea', 'Rio de Janeiro', 20);
+INSERT INTO editora (nome, email, endereco, estado, id_telefone) VALUES ('Editora Rocco', 'rocco@gmail.com', 'Rua Argentina, 171 - São Cristóvão', 'Rio de Janeiro', 21);
 
 -- Inserir livro
 INSERT INTO livro (titulo, preco, quantidadeEstoque, isbn, dataLancamento, descricao, classificacao, id_fornecedor, id_editora) 
@@ -110,8 +124,8 @@ INSERT INTO pedido (dataPedido, valorTotal, ifPedidoFeito, id_formaPagamento, id
             VALUES ('2023-06-15', 140.25, true, 2, 2);
 
 -- itemPedido
-INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (3.00, 10, 0.0, 1);
-INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (2.35, 5, 0.0, 2);
-INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (3.60, 15, 0.0, 1);
-INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (4.50, 2, 0.0, 3);
-INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (5.00, 20, 0.0, 2);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (3.00, 10, 270, 1);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (1.25, 5, 88.25, 2);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (0.90, 3, 52.60, 1);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (0.0, 2, 511, 3);
+INSERT INTO itemPedido (desconto, quantidade, subtotal, id_livro) VALUES (0.0, 1, 140.25, 2);
