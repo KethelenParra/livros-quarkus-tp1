@@ -28,13 +28,12 @@ public class PedidoResourceTest {
     }
 
     @Test
+    @TestSecurity(user = "teste", roles = "Funcionario")
     public void findByIdTest() {
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ1bml0aW5zLWp3dCIsImlkIjozLCJzdWIiOiJhbmFvbGl2ZWlyYSIsImdyb3VwcyI6WyJDbGllbnRlIl0sImV4cCI6MTc0OTk1ODM2MywiaWF0IjoxNzE4NDIyMzYzLCJqdGkiOiI0ZTk3YzVjYy1jNzRjLTQxMDUtYWM2YS0wN2QwMWExZTRhOTQifQ.naLkGeq8--RNi80UiJbXO5ssvALmt7FWmbzQ0IPTAxTA9KvZSmkicvDrVIG_bF2UT1273mPc29CelBLItOZDE9zCbJdTQl_YDf0p9ZDUqqgIoO3G7zE00BzO6JvccmStcHpcZc12ybyq1D7kcXzUnybZrqSJvE5r56od8xewE3UdhfQJ5El_0MEClxV8HqL5t0Y8wkt8CiXdxiTpANuuSfY8gkS-XCGQ4wzeSw4ZpXgFXT3WUr9WmgpVseAFSVGgzX8eazA21BwMRbM5sKV1UiRp2bBE-uuSeQvweL7QvT5grl4m6t2tuj1oUoHm-U1L7ZzQEQa9eXYjjnX3SRn-Mw";
-      
+        
         given()
-        .header("Authorization", "Bearer " + token)
             .when()
-            .get("/pedidos/3")
+            .get("/pedidos/1")
             .then()
             .statusCode(200);
     }
