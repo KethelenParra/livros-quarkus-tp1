@@ -2,7 +2,6 @@ package br.unitins.topicos1.service.serviceImpl;
 
 import br.unitins.topicos1.dto.CadastroBasicoDTO;
 import br.unitins.topicos1.dto.Response.CadastroBasicoResponseDTO;
-import br.unitins.topicos1.dto.Response.UsuarioResponseDTO;
 import br.unitins.topicos1.model.Enum.Sexo;
 import br.unitins.topicos1.model.Pessoa.Cliente;
 import br.unitins.topicos1.model.Pessoa.Usuario;
@@ -28,8 +27,9 @@ public class CadastroBasicoServiceImpl implements CadastroBasicoService {
     HashService hashService;
 
     @Override
-   @Transactional
+    @Transactional
     public CadastroBasicoResponseDTO create(@Valid CadastroBasicoDTO dto) {
+        Cliente cliente = new Cliente();
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
         usuario.setEmail(dto.email());
@@ -39,17 +39,9 @@ public class CadastroBasicoServiceImpl implements CadastroBasicoService {
 
         usuarioRepository.persist(usuario);
 
-        Cliente cliente = new Cliente();
         cliente.setUsuario(usuario);
 
         clienteRepository.persist(cliente);
         return CadastroBasicoResponseDTO.valueOf(cliente);
-    }
-
-    @Override
-    public UsuarioResponseDTO login(String username, String senha) {
-        Cliente cliente = clienteRepository.findByUsernameAndSenha(username, senha);
-        return UsuarioResponseDTO.valueOf(cliente.getUsuario());
-    }
-    
+    }    
 }

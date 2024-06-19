@@ -4,7 +4,7 @@ import br.unitins.topicos1.model.Enum.Sexo;
 import br.unitins.topicos1.model.Pessoa.Cliente;
 
 public record CadastroBasicoResponseDTO(
-        Long idCliente,
+        Long id,
         String nome,
         String email,
         String username,
@@ -13,7 +13,7 @@ public record CadastroBasicoResponseDTO(
 
     public static CadastroBasicoResponseDTO valueOf(Cliente cliente) {
         return new CadastroBasicoResponseDTO(
-            cliente.getUsuario().getId(), 
+            cliente.getId(), 
             cliente.getUsuario().getNome(),
             cliente.getUsuario().getEmail(),
             cliente.getUsuario().getUsername(),

@@ -73,13 +73,13 @@ public class PedidoResource {
     public Response create(@Valid PedidoDTO dto) {
 
         try{
-        String username = tokenJwt.getName();
+            String username = tokenJwt.getName();
 
-        if(!pedidoservice.clienteAutenticado(username, dto.idCliente()))
-            throw new ValidationException("Valificando cliente para criacao de pedido", "você não tem permissão para realizar pedido. - Executando PedidoResource_create");
-            
-        LOG.info("Executando PedidoResource_create");
-        return Response.status(Status.CREATED).entity(pedidoservice.create(dto)).build();
+            if(!pedidoservice.clienteAutenticado(username, dto.idCliente()))
+                throw new ValidationException("Valificando cliente para criacao de pedido", "você não tem permissão para realizar pedido. - Executando PedidoResource_create");
+                
+            LOG.info("Executando PedidoResource_create");
+            return Response.status(Status.CREATED).entity(pedidoservice.create(dto)).build();
         }catch (Exception e){
             LOG.error("Erro ao criar pedido - Executando PedidoResource_create", e);
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();

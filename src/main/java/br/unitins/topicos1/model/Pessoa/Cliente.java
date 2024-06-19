@@ -9,7 +9,7 @@ import jakarta.persistence.OneToOne;
 public class Cliente extends DefaultEntity {
     
     @OneToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     private String cep;

@@ -30,6 +30,7 @@ import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @ApplicationScoped
 public class PedidoServiceImpl implements PedidoService {
@@ -63,22 +64,22 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     @Transactional
-    public PedidoResponseDTO create(PedidoDTO dto) {
+    public PedidoResponseDTO create(@Valid PedidoDTO dto) {
         String username = securityIdentity.getPrincipal().getName();   
 
         Cliente cliente = clienteRepository.findById(dto.idCliente());
         if (cliente == null) {
-            throw new ValidationException("Buscando Cliente", "Cliente não encontrado");
-        }
+            throw new ValidationException("Buscando Cliente", "Cliente não encontrado - Executando PedidoServiceImpl_create");
+        }     
                 
-        if(!clienteAutenticado(username, dto.idCliente())){
-            throw new ValidationException("Verificando...", "Você não tem autorização para realizar o pedido.");
-        }
+        if (!clienteAutenticado(username, dto.idCliente())) {
+            throw new ValidationException("Verificando...", "Você não tem autorização para realizar o pedido. - Executando PedidoServiceImpl_create");
+        }       
 
         Pedido pedido = new Pedido();
                 
-        pedido.setDataPedido(LocalDateTime.now());
         pedido.setCliente(cliente);
+        pedido.setDataPedido(LocalDateTime.now());
         List<ItemPedido> itens = new ArrayList<>();
         Double valorTotal = 0.0;
 
@@ -152,7 +153,7 @@ public class PedidoServiceImpl implements PedidoService {
         List<PedidoResponseDTO> pedidos = pedidoRepository.find("cliente.usuario.username", username).stream().map(e -> PedidoResponseDTO.valueOf(e)).toList();
         
         if(pedidos.isEmpty()){
-            throw new ValidationException("Meus pedidos","Você ainda não fez nenhum pedido.");
+            throw new ValidationException("Meus pedidos","Você ainda não fez nenhum pedido. - Executando PedidoServiceImpl_meusPedidos");
         }
 
         return pedidos;
@@ -180,7 +181,7 @@ public class PedidoServiceImpl implements PedidoService {
         cartaoCreditoRepository.persist(pagamento);
         pedido.setFormaPagamento(pagamento);
         if (pedido.getFormaPagamento() == null)
-            throw new ValidationException("PagamentoCartaoCredito","Não foi efetuado nenhum pagamento");
+            throw new ValidationException("PagamentoCartaoCredito","Não foi efetuado nenhum pagamento - Executando PedidoServiceImpl_pagamentoCartao");
         finalizarPedido(pedido.getId());
     }
 
@@ -193,7 +194,7 @@ public class PedidoServiceImpl implements PedidoService {
         boletoRepository.persist(pagamento);
         pedido.setFormaPagamento(pagamento);
         if (pedido.getFormaPagamento() == null) {
-            throw new ValidationException("PagamentoBoleto","Não foi efetuado nenhum pagamento");
+            throw new ValidationException("PagamentoBoleto","Não foi efetuado nenhum pagamento - Executando PedidoServiceImpl_pagamentoBoleto");
         }
         finalizarPedido(pedido.getId());
     }
@@ -207,7 +208,7 @@ public class PedidoServiceImpl implements PedidoService {
         pixRepository.persist(pagamento);
         pedido.setFormaPagamento(pagamento);
         if (pedido.getFormaPagamento() == null) {
-            throw new ValidationException("PagamentoPix","Não foi efetuado nenhum pagamento");
+            throw new ValidationException("PagamentoPix","Não foi efetuado nenhum pagamento - Executando PedidoServiceImpl_pagamentoPix");
         }
         finalizarPedido(pedido.getId());
     }
@@ -234,10 +235,10 @@ public class PedidoServiceImpl implements PedidoService {
             .map(e -> PedidoResponseDTO.valueOf(e)).toList();
     }
 
-    public boolean clienteAutenticado(String username, Long idCliente){
+    public boolean clienteAutenticado(String username, Long idCliente) {
         Cliente clienteAutenticado = clienteRepository.findByUsername(username);
         return clienteAutenticado != null && clienteAutenticado.getId().equals(idCliente);
-    }
+    }    
 
     @Override
     public List<PedidoResponseDTO> findByCliente(Long idCliente) {
