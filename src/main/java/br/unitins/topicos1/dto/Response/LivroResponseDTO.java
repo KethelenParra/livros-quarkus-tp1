@@ -18,7 +18,8 @@ public record LivroResponseDTO(
         LocalDate datalancamento,
         Classificacao id_classificacao,
         String descricao,
-        FornecedorResponseDTO fornecedor
+        FornecedorResponseDTO fornecedor, 
+        String nomeImagem
 ) {
     public static LivroResponseDTO valueOf(Livro livro) {
                                                 List<AutorResponseDTO> listaAutor = livro.getListaAutor()
@@ -41,6 +42,7 @@ public record LivroResponseDTO(
                 livro.getDatalancamento(),
                 livro.getClassificacao(),
                 livro.getDescricao(),
-                FornecedorResponseDTO.valueOf(livro.getFornecedor()));
+                FornecedorResponseDTO.valueOf(livro.getFornecedor()),
+                livro.getNomeImagem());
     }
 }
