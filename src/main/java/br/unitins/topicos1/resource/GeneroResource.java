@@ -32,7 +32,7 @@ public class GeneroResource {
     @Path("/{id}")
     @RolesAllowed({"Funcionario"})
     public Response findById(@PathParam("id") Long id){
-        LOG.info("Executando o findById");
+        LOG.info("Executando o findById - Executando GeneroResource_FindById");
         LOG.infof("Executando o método findById. Id: %s", id.toString());
         return Response.ok(generoService.findById(id)).build();
     }
@@ -40,7 +40,7 @@ public class GeneroResource {
     @GET
     @RolesAllowed({"Funcionario"})
     public Response findAll(){
-        LOG.info("Buscando todos os generos, findAll");
+        LOG.info("Buscando todos os generos - Executando GeneroResource_FindAll");
         return Response.ok(generoService.findAll()).build();
     }
 
@@ -48,7 +48,7 @@ public class GeneroResource {
     @Path("/search/nome/{nome}")
     @RolesAllowed({"Funcionario"})
     public Response findByNome(@PathParam("nome") String nome){
-        LOG.info("Buscando os generos pelo nome, findByNome");
+        LOG.info("Buscando os generos pelo nome - Executando GeneroResource_FindByNome");
         return Response.ok(generoService.findByNome(nome)).build();
     }
 
@@ -56,7 +56,7 @@ public class GeneroResource {
     @Path("/search/descricao/{descricao}")
     @RolesAllowed({"Funcionario"})
     public Response findByDescricao(@PathParam("descricao") String descricao){
-        LOG.info("Buscando os generos pela descricao, findByDescricao");
+        LOG.info("Buscando os generos pela descricao - Executando GeneroResource_FindByDescricao");
         return Response.ok(generoService.findByDescricao(descricao)).build();
     }
 
@@ -64,11 +64,11 @@ public class GeneroResource {
     @RolesAllowed({"Funcionario"})
     public Response create (GeneroDTO dto){
         try {
-            LOG.info("Criando um novo genero, create");
+            LOG.info("Criando um novo genero - Executando GeneroResource_create");
             return Response.status(Status.CREATED).entity(generoService.create(dto)).build();
         } catch (Exception e) {
-            LOG.error("Erro ao criar um novo genero", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao criar um novo genero").build();
+            LOG.error("Erro ao criar um novo genero - Executando GeneroResource_create", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao criar um novo genero - Executando GeneroResource_create").build();
         }
     }
 
@@ -77,12 +77,12 @@ public class GeneroResource {
     @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, GeneroDTO dto){
         try {
-            LOG.info("Atualizando um genero, update");
+            LOG.info("Atualizando um genero - Executando GeneroResource_update");
             generoService.update(id, dto);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao atualizar um genero", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar um genero").build();
+            LOG.error("Erro ao atualizar um genero - Executando GeneroResource_update", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar um genero - Executando GeneroResource_update").build();
         }
     }
 
@@ -91,12 +91,12 @@ public class GeneroResource {
     @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
         try {
-            LOG.info("Deletando um genero, delete");
+            LOG.info("Deletando um genero - Executando GeneroResource_delete");
             generoService.delete(id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao deletar um genero", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar um genero").build();
+            LOG.error("Erro ao deletar um genero - Executando GeneroResource_deleta", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar um genero - Executando GeneroResource_deleta").build();
         }
     }    
 }

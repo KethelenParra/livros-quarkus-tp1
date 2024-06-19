@@ -48,7 +48,7 @@ public class AutorResource {
     @GET
     @RolesAllowed({"Funcionario", "Cliente"})
     public Response findAll() {
-        LOG.info("Buscando todos os autores");
+        LOG.info("Buscando todos os autores - Executando AutorResource_FindAll");
         return Response.ok(autorService.findAll()).build();
     }
 
@@ -56,7 +56,7 @@ public class AutorResource {
     @Path("/search/nome/{nome}")
     @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByNome(@PathParam("nome") String nome) {
-        LOG.info("Buscando autores por nome");
+        LOG.info("Buscando autores por nome - Executando AutorResource_FindByNome");
         return Response.ok(autorService.findByNome(nome)).build();
     }
 
@@ -64,7 +64,7 @@ public class AutorResource {
     @Path("/search/biografia/{biografia}")
     @RolesAllowed({"Funcionario", "Cliente"}) 
     public Response findByBiografia(@PathParam("biografia") String biografia) {
-        LOG.info("Buscando autores por biografia");
+        LOG.info("Buscando autores por biografia - - Executando AutorResource_FindByBiografia");
         return Response.ok(autorService.findByBiografia(biografia)).build();
     }
 
@@ -72,11 +72,11 @@ public class AutorResource {
     @RolesAllowed({"Funcionario"}) 
     public Response create(@Valid AutorDTO dto) {
         try {
-            LOG.info("Criando novo autor: ");
+            LOG.info("Criando novo autor: - Executando AutorResource_create");
             return Response.status(Status.CREATED).entity(autorService.create(dto)).build();
         } catch (Exception e) {
-            LOG.error("Erro ao criar autor", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao criar autor.").build();
+            LOG.error("Erro ao criar autor - Executando AutorResource_create", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao criar autor. - - Executando AutorResource_Create").build();
         }
     }
 
@@ -85,12 +85,12 @@ public class AutorResource {
     @RolesAllowed({"Funcionario"}) 
     public Response update(@PathParam("id") Long id, AutorDTO dto) {
         try {
-            LOG.info("Atualizando autor: " + id);
+            LOG.info("Atualizando autor: - Executando AutorResource_update" + id);
             autorService.update(id, dto);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao atualizar autor", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao fazer update autor.").build();
+            LOG.error("Erro ao atualizar autor - Executando AutorResource_update", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao fazer update autor. - Executando AutorResource_update").build();
         }
     }
 
@@ -99,12 +99,12 @@ public class AutorResource {
     @RolesAllowed({"Funcionario"}) 
     public Response delete(@PathParam("id") Long id) {
         try {
-            LOG.info("Removendo autor: " + id);
+            LOG.info("Removendo autor: - Executando AutorResource_delete" + id);
             autorService.delete(id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao remover autor", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar autor").build();
+            LOG.error("Erro ao remover autor - Executando AutorResource_FindBydelete", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar autor - Executando AutorResource_delete").build();
         }
     }
 
@@ -115,11 +115,11 @@ public class AutorResource {
     public Response upload(@PathParam("id") Long id, @MultipartForm ImageForm form) {
         try {
             fileService.salvar(id, form.getNomeImagem(), form.getImagem());
-            LOG.infof("Imagem salva com sucesso");
+            LOG.infof("Imagem salva com sucesso - Executando AutorResource_upload");
             return Response.noContent().build();
         } catch (Exception e) {
-            LOG.error("Erro ao salvar imagem do livro", e);
-            return Response.status(Status.CONFLICT).entity("Erro ao salvar imagem do livro").build();
+            LOG.error("Erro ao salvar imagem do livro - Executando AutorResource_upload", e);
+            return Response.status(Status.CONFLICT).entity("Erro ao salvar imagem do livro - Executando AutorResource_upload").build();
         }
     }
 
@@ -132,7 +132,7 @@ public class AutorResource {
             
             ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
             response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
-            LOG.infof("Download do arquivo %s concluído com sucesso.", nomeImagem);
+            LOG.infof("Download do arquivo %s concluído com sucesso. - Executando AutorResource_download", nomeImagem);
             return response.build();
         } catch (Exception e) {
             LOG.errorf("Erro ao realizar o download do arquivo: %s", nomeImagem, e);

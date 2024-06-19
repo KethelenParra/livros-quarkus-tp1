@@ -61,7 +61,7 @@ public class AuthResource {
             }
         } catch (Exception e) {
             LOG.error("Erro durante o login. Verifique seu username ou senha!");
-            throw new ValidationException("Verificando", "Erro durante o login. Verifique seu username ou senha!");
+            throw new ValidationException("Verificando", "Erro durante o login. Verifique seu username ou senha! - Executando AuthResource_Login");
         }
         
     }

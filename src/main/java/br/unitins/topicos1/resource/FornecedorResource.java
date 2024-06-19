@@ -33,7 +33,7 @@ public class FornecedorResource {
     @Path("/{id}")
     @RolesAllowed({"Funcionario"})
     public Response findById(@PathParam("id") Long id){
-        LOG.info("Executando o findById");
+        LOG.info("Executando o findById - Executando FornecedorResource_FindById");
         LOG.infof("Executando o método findById. Id: %s", id.toString());
         return Response.ok(fornecedorService.findById(id)).build();
     }
@@ -41,7 +41,7 @@ public class FornecedorResource {
     @GET
     @RolesAllowed({"Funcionario"})
     public Response findAll(){
-        LOG.info("Buscando todos os fornecedores");
+        LOG.info("Buscando todos os fornecedores - Executando FornecedorResource_FindAll");
         return Response.ok(fornecedorService.findAll()).build();
     }
 
@@ -49,7 +49,7 @@ public class FornecedorResource {
     @Path("/search/nome/{nome}")
     @RolesAllowed({"Funcionario"})
     public Response findByNome(@PathParam("nome") String nome){
-        LOG.info("Buscando fornecedor por nome: " + nome);
+        LOG.info("Buscando fornecedor por nome: - Executando FornecedorResource_FindByNome " + nome);
         return Response.ok(fornecedorService.findByNome(nome)).build();
     }
 
@@ -57,7 +57,7 @@ public class FornecedorResource {
     @Path("/search/estado/{estado}")
     @RolesAllowed({"Funcionario"})
     public Response findByEstado(@PathParam("estado") String estado){
-        LOG.info("Buscando todos os fornecedores por estado: " + estado);
+        LOG.info("Buscando todos os fornecedores por estado: - Executando FornecedorResource_FindByEstado" + estado);
         return Response.ok(fornecedorService.findByEstado(estado)).build();
     }
 
@@ -65,7 +65,7 @@ public class FornecedorResource {
     @Path("/search/cidade/{cidade}")
     @RolesAllowed({"Funcionario"})
     public Response findByCidade(@PathParam("cidade") String cidade){
-        LOG.info("Buscando todos os fornecedores por cidade: " + cidade);
+        LOG.info("Buscando todos os fornecedores por cidade: - Executando FornecedorResource_FindByCidade" + cidade);
         return Response.ok(fornecedorService.findByCidade(cidade)).build();
     }
 
@@ -73,7 +73,7 @@ public class FornecedorResource {
     @Path("/search/cnpj/{cnpj}")
     @RolesAllowed({"Funcionario"})
     public Response findByCnpj(@PathParam("cnpj") String cnpj){
-        LOG.info("Buscando fornecedor por cnpj: " + cnpj);
+        LOG.info("Buscando fornecedor por cnpj: - Executando FornecedorResource_FindByCnpj" + cnpj);
         return Response.ok(fornecedorService.findByCnpj(cnpj)).build();
     }
 
@@ -81,11 +81,11 @@ public class FornecedorResource {
     @RolesAllowed({"Funcionario"})
     public Response create(@Valid FornecedorDTO dto){
         try {
-            LOG.info("Criando novo fornecedor: ");
+            LOG.info("Criando novo fornecedor: - Executando FornecedorResource_create");
             return Response.status(Status.CREATED).entity(fornecedorService.create(dto)).build();
         } catch (Exception e) {
             LOG.error("Erro ao criar fornecedor: " + e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao criar fornecedor").build();
+            return Response.status(Status.NOT_FOUND).entity("Erro ao criar fornecedor - Executando FornecedorResource_create").build();
         }
     }
 
@@ -94,12 +94,12 @@ public class FornecedorResource {
     @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, FornecedorDTO dto){
         try {
-            LOG.info("Fornecedor atualizado com sucesso");
+            LOG.info("Fornecedor atualizado com sucesso - Executando FornecedorResource_update");
             fornecedorService.update(id, dto);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao atualizar fornecedor: " + e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar fornecedor").build();
+            LOG.error("Erro ao atualizar fornecedor: - Executando FornecedorResource_update" + e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar fornecedor - Executando FornecedorResource_update").build();
         }
     }
 
@@ -108,12 +108,12 @@ public class FornecedorResource {
     @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
         try {
-            LOG.info("Fornecedor deletado com sucesso");
+            LOG.info("Fornecedor deletado com sucesso - Executando FornecedorResource_delete");
             fornecedorService.delete(id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao deletar fornecedor: " + e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar fornecedor").build();
+            LOG.error("Erro ao deletar fornecedor: - Executando FornecedorResource_delete" + e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar fornecedor - Executando FornecedorResource_delete").build();
         }
     }
 }

@@ -35,8 +35,8 @@ public class AvaliacaoResource {
     @GET
     @RolesAllowed({ "Funcionario", "Cliente" })
     public List<AvaliacaoResponseDTO> findAll() {
-        LOG.info("Buscando todas as avaliações");
-        LOG.debug("ERRO DE DEBUG.");
+        LOG.info("Buscando todas as avaliações - Executando AvaliacaoResource_FindAll");
+        LOG.debug("ERRO DE DEBUG. - Executando AvaliacaoResource_FindAll");
         return avaliacaoService.findAll();
     }
 
@@ -45,7 +45,7 @@ public class AvaliacaoResource {
     @RolesAllowed({ "Funcionario" })
     public AvaliacaoResponseDTO findById(@PathParam("id") Long id) throws NotFoundException {
         LOG.infof("Buscando avaliações por ID. ", id);
-        LOG.debug("ERRO DE DEBUG.");
+        LOG.debug("ERRO DE DEBUG. - Executando AvaliacaoResource_FindById");
         return avaliacaoService.findById(id);
     }
 
@@ -54,14 +54,14 @@ public class AvaliacaoResource {
     public Response create(AvaliacaoDTO avaliacaoDto) {
         try {
             AvaliacaoResponseDTO avaliacao = avaliacaoService.create(avaliacaoDto);
-            LOG.infof("Produto inserido na lista Desejo.");
+            LOG.infof("Avaliação criada. - Executando AvaliacaoResource_create");
 
             return Response.status(Status.CREATED).entity(avaliacao).build();
 
         }catch (Exception e) {
-            LOG.error("Erro ao inserir uma avaliação. ", e);
+            LOG.error("Erro ao inserir uma avaliação. - Executando AvaliacaoResource_create", e);
         }
-        return Response.status(Status.NOT_FOUND).entity("Erro ao inserir uma avaliação. ").build();
+        return Response.status(Status.NOT_FOUND).entity("Erro ao inserir uma avaliação. - Executando AvaliacaoResource_create").build();
     }
 
     @PUT
@@ -71,15 +71,15 @@ public class AvaliacaoResource {
         try {
             avaliacaoService.update(id, avaliacaoDto);
 
-            LOG.infof("Avaliação atualizada com sucesso.", id);
+            LOG.infof("Avaliação atualizada com sucesso. - Executando AvaliacaoResource_update", id);
 
             return Response.status(Status.NO_CONTENT).build(); //204
         }  catch (Exception e){       
 
-            LOG.errorf("Erro ao atualizar a avaliação. ", id, e);
+            LOG.errorf("Erro ao atualizar a avaliação. - Executando AvaliacaoResource_update", id, e);
             
         }
-        return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar a avaliação.").build();
+        return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar a avaliação. - Executando AvaliacaoResource_update").build();
     }
 
     @DELETE
@@ -89,10 +89,10 @@ public class AvaliacaoResource {
 
         try {
             avaliacaoService.delete(id);
-            LOG.infof("avaliação excluída com sucesso.", id);
+            LOG.infof("avaliação excluída com sucesso. - Executando AvaliacaoResource_delete", id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (IllegalArgumentException e) {
-            LOG.error("Erro ao deletar avaliação: parâmetros inválidos.", e);
+            LOG.error("Erro ao deletar avaliação: parâmetros inválidos. - Executando AvaliacaoResource_delete", e);
             throw e;
         } 
     }

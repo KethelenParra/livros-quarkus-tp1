@@ -49,19 +49,22 @@ public class PedidoResource {
     @Path("/{id}")
     @RolesAllowed({"Funcionario"})
     public Response findById(@PathParam("id") Long id){
+        LOG.info("Buscando com id - Executando PedidoResource_FindById");
         return Response.ok(pedidoservice.findById(id)).build();
     }
 
     @GET
     @RolesAllowed({"Funcionario"})
     public Response findAll(){
-            return Response.ok(pedidoservice.findAll()).build();
+        LOG.info("Buscando todos os pedidos - Executando PedidoResource_FindAll");
+        return Response.ok(pedidoservice.findAll()).build();
     }
 
     @GET
     @Path("/search/clientes/{idCliente}")
     @RolesAllowed({"Funcionario"})
     public Response findByCliente(@PathParam("idCliente") Long idCliente){
+        LOG.info("Buscando com id do cliente - Executando PedidoResource_FindByCliente");
         return Response.ok(pedidoservice.findByCliente(idCliente)).build();
     }
 
@@ -73,11 +76,12 @@ public class PedidoResource {
         String username = tokenJwt.getName();
 
         if(!pedidoservice.clienteAutenticado(username, dto.idCliente()))
-            throw new ValidationException("Valificando cliente para criacao de pedido", "você não tem permissão para realizar pedido.");
-        
+            throw new ValidationException("Valificando cliente para criacao de pedido", "você não tem permissão para realizar pedido. - Executando PedidoResource_create");
+            
+        LOG.info("Executando PedidoResource_create");
         return Response.status(Status.CREATED).entity(pedidoservice.create(dto)).build();
         }catch (Exception e){
-            LOG.error("Erro ao criar pedido", e);
+            LOG.error("Erro ao criar pedido - Executando PedidoResource_create", e);
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
@@ -92,13 +96,13 @@ public class PedidoResource {
             Cliente cliente = clienteRepository.findByUsername(username);
 
             if(!pedidoservice.clienteAutenticado(username, cliente.getId()))
-                throw new ValidationException("Validando cliente para cancelamento de pedido", "Você não tem permissão para cancelar pedido.");
+                throw new ValidationException("Validando cliente para cancelamento de pedido", "Você não tem permissão para cancelar pedido. - Executando PedidoResource_cancelarPedido");
         
             pedidoservice.cancelarPedido(cliente.getId());
-            LOG.info("Pedido cancelada com sucesso.");
+            LOG.info("Pedido cancelada com sucesso. - Executando PedidoResource_cancelarPedido");
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao cancelar compra.", e);
+            LOG.error("Erro ao cancelar compra. - Executando PedidoResource_cancelarPedido", e);
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
@@ -108,16 +112,16 @@ public class PedidoResource {
     @RolesAllowed({"Funcionario","Cliente"})
     public Response meusPedidos(){
         try {
-            LOG.info("Meus pedidos.");
+            LOG.info("Meus Pedido. - Executando PedidoResource_meusPedidos");
             String username = tokenJwt.getName();
             Cliente cliente = clienteRepository.findByUsername(username);
 
             if(!pedidoservice.clienteAutenticado(username, cliente.getId()))
-                throw new ValidationException("Validando cliente para visualiar pedidos", "Você não tem permissão para vê os pedidos");
+                throw new ValidationException("Validando cliente para visualiar pedidos", "Você não tem permissão para vê os pedidos - Executando PedidoResource_meusPedidos");
 
             return Response.ok(pedidoservice.meusPedidos()).build();
         } catch (NotFoundException e) {
-            LOG.error("Erro ao visualizar meus pedidos", e);
+            LOG.error("Erro ao visualizar meus pedidos - Executando PedidoResource_meusPedidos", e);
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
@@ -128,18 +132,19 @@ public class PedidoResource {
     public Response pagarBoleto() {
 
         try {
+            
             String username = tokenJwt.getName();
             Cliente cliente = clienteRepository.findByUsername(username);
 
             if(!pedidoservice.clienteAutenticado(username, cliente.getId()))
-                 throw new ValidationException("ValidandoPagamento", "Você não tem permissão para realizar pagamento via boleto de pedido.");
+                 throw new ValidationException("ValidandoPagamento", "Você não tem permissão para realizar pagamento via boleto de pedido. - Executando PedidoResource_pagarBoleto");
         
             pedidoservice.pagamentoBoleto(cliente.getId());
 
-            LOG.info("Pagamento com boleto realizado com sucesso.");
+            LOG.info("Pagamento com boleto realizado com sucesso. - Executando PedidoResource_pagarBoleto");
             return Response.status(Status.ACCEPTED).build();
         } catch (Exception e) {
-            LOG.error("Erro ao realizar pagamento com boleto");
+            LOG.error("Erro ao realizar pagamento com boleto - Executando PedidoResource_pagarBoleto");
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
@@ -153,15 +158,15 @@ public class PedidoResource {
             Cliente cliente = clienteRepository.findByUsername(username);
     
             if(!pedidoservice.clienteAutenticado(username, cliente.getId()))
-                throw new ValidationException("ValidandoPagamento", "Você não tem permissão para realizar pagamento via pix de pedido.");
+                throw new ValidationException("ValidandoPagamento", "Você não tem permissão para realizar pagamento via pix de pedido. - Executando PedidoResource_pagarPix");
             
 
             pedidoservice.pagamentoPix(cliente.getId());
 
-            LOG.info("Pagamento do pix realizado com sucesso.");
+            LOG.info("Pagamento do pix realizado com sucesso. - Executando PedidoResource_pagarPix");
             return Response.status(Status.ACCEPTED).build();
         } catch (Exception e) {
-            LOG.error("Erro ao realizar pagamento com pix");
+            LOG.error("Erro ao realizar pagamento com pix - Executando PedidoResource_pagarPix");
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
@@ -175,14 +180,14 @@ public class PedidoResource {
             Cliente cliente = clienteRepository.findByUsername(username);
     
             if(!pedidoservice.clienteAutenticado(username, cliente.getId()))
-                throw new ValidationException("ValidandoPagamento", "Você não tem permissão para realizar pagamento via pix de pedido.");
+                throw new ValidationException("ValidandoPagamento", "Você não tem permissão para realizar pagamento via pix de pedido. - Executando PedidoResource_pagarCartaoCredito");
             
             pedidoservice.pagamentoCartao(cliente.getId(), cartao);
 
-            LOG.info("Pagamento com cartão realizado com sucesso.");
+            LOG.info("Pagamento com cartão realizado com sucesso. - Executando PedidoResource_pagarCartaoCredito");
             return Response.status(Status.ACCEPTED).build();
         } catch (Exception e) {
-            LOG.error("Erro ao realizar pagamento com cartao de credito");
+            LOG.error("Erro ao realizar pagamento com cartao de credito - Executando PedidoResource_pagarCartaoCredito");
             return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }

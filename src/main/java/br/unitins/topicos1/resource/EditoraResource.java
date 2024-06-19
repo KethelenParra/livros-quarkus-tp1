@@ -32,14 +32,14 @@ public class EditoraResource {
     @Path("/{id}")
     @RolesAllowed({"Funcionario"})
     public Response findById(@PathParam("id") Long id){
-        LOG.info("Buscando editora por id: " + id);
+        LOG.info("Buscando editora por id: - Executando EditoraResource_FindById" + id);
         return Response.ok(editoraService.findById(id)).build();
     }
 
     @GET
     @RolesAllowed({"Funcionario"})
     public Response findAll(){
-        LOG.info("Buscando todas as editoras");
+        LOG.info("Buscando todas as editoras - Executando EditoraResource_Findall");
         return Response.ok(editoraService.findAll()).build();
     }
 
@@ -47,7 +47,7 @@ public class EditoraResource {
     @Path("/search/nome/{nome}")
     @RolesAllowed({"Funcionario"})
     public Response findByNome(@PathParam("nome") String nome){
-        LOG.info("Buscando editora por nome: " + nome);
+        LOG.info("Buscando editora por nome: - Executando EditoraResource_FindByNome" + nome);
         return Response.ok(editoraService.findByNome(nome)).build();
     }
 
@@ -55,7 +55,7 @@ public class EditoraResource {
     @Path("/search/estado/{estado}")
     @RolesAllowed({"Funcionario"})
     public Response findByEstado(@PathParam("estado") String estado){
-        LOG.info("Buscando todas as editora por estado: " + estado);
+        LOG.info("Buscando todas as editora por estado: - Executando EditoraResource_FindByEstado" + estado);
         return Response.ok(editoraService.findByEstado(estado)).build();
     }
 
@@ -63,11 +63,11 @@ public class EditoraResource {
     @RolesAllowed({"Funcionario"})
     public Response create (EditoraDTO dto){
         try {
-            LOG.info("Editora criado com sucesso");
+            LOG.info("Editora criado com sucesso - Executando EditoraResource_create");
             return Response.status(Status.CREATED).entity(editoraService.create(dto)).build();
         } catch (Exception e) {
-            LOG.error("Erro ao cadastrar editora", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao cadastrar editora").build();
+            LOG.error("Erro ao cadastrar editora - Executando EditoraResource_create", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao cadastrar editora - Executando EditoraResource_create").build();
         }
     }
 
@@ -76,12 +76,12 @@ public class EditoraResource {
     @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, EditoraDTO dto){
         try {
-            LOG.info("Editora atualizado com sucesso");
+            LOG.info("Editora atualizado com sucesso - Executando EditoraResource_update");
             editoraService.update(id, dto);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao atualizar editora", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar editora").build();
+            LOG.error("Erro ao atualizar editora - Executando EditoraResource_update", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar editora - Executando EditoraResource_update").build();
         }
     }
 
@@ -90,12 +90,12 @@ public class EditoraResource {
     @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
         try {
-            LOG.info("Editora deletado com sucesso");
+            LOG.info("Editora deletado com sucesso - Executando EditoraResource_delete");
             editoraService.delete(id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao deletar editora", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar editora").build();
+            LOG.error("Erro ao deletar editora - Executando EditoraResource_delete", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar editora - Executando EditoraResource_delete").build();
         }
     }    
 }

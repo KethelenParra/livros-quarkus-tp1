@@ -48,7 +48,7 @@ public class LivroResource {
     @GET
     @RolesAllowed({"Funcionario", "Cliente"})
     public Response findAll(){
-        LOG.info("Buscando todos os livros, findAll");
+        LOG.info("Buscando todos os livros - Executando LivroResource_FindAll");
         return Response.ok(livroService.findAll()).build();
     }
 
@@ -56,7 +56,7 @@ public class LivroResource {
     @Path("/search/titulo/{titulo}")
     @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByTitulo(@PathParam("titulo") String titulo){
-        LOG.info("Buscando livros por título, findByTitulo");
+        LOG.info("Buscando livros por título - Executando LivroResource_FindByTitulo");
         return Response.ok(livroService.findByTitulo(titulo)).build();
     }
 
@@ -64,7 +64,7 @@ public class LivroResource {
     @Path("/search/isbn/{isbn}")
     @RolesAllowed({"Funcionario","Cliente"})
     public Response findByIsbn(@PathParam("isbn") String isbn){
-        LOG.info("Buscando livros por ISBN, findByIsbn");
+        LOG.info("Buscando livros por ISBN - Executando LivroResource_findByIsbn");
         return Response.ok(livroService.findByIsbn(isbn)).build();
     }
 
@@ -72,7 +72,7 @@ public class LivroResource {
     @Path("/search/descricao/{descricao}")
     @RolesAllowed({"Funcionario", "Cliente"})
     public Response findByDescricao(@PathParam("descricao") String descricao){
-        LOG.info("Buscando livros por descrição, findByDescricao");
+        LOG.info("Buscando livros por descrição - Executando LivroResource_findByDescricao");
         return Response.ok(livroService.findByDescricao(descricao)).build();
     }
 
@@ -80,11 +80,11 @@ public class LivroResource {
     @RolesAllowed({"Funcionario"})
     public Response create (LivroDTO dto){
         try {
-            LOG.info("Criando um novo livro, create");
+            LOG.info("Criando um novo livro - Executando LivroResource_create");
             return Response.status(Status.CREATED).entity(livroService.create(dto)).build();
         } catch (Exception e) {
-            LOG.error("Erro ao criar um novo livro", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao criar um novo livro").build();
+            LOG.error("Erro ao criar um novo livro - Executando LivroResource_create", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao criar um novo livro - Executando LivroResource_create").build();
         }
     }
 
@@ -93,12 +93,12 @@ public class LivroResource {
     @RolesAllowed({"Funcionario"})
     public Response update(@PathParam("id") Long id, LivroDTO dto){
         try {
-            LOG.info("Atualizando um livro, update");
+            LOG.info("Atualizando um livro- Executando LivroResource_update");
             livroService.update(id, dto);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao atualizar um livro", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar um livro").build();
+            LOG.error("Erro ao atualizar um livro - Executando LivroResource_update", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao atualizar um livro - Executando LivroResource_update").build();
         }
     }
 
@@ -107,12 +107,12 @@ public class LivroResource {
     @RolesAllowed({"Funcionario"})
     public Response delete(@PathParam("id") Long id){
         try {
-            LOG.info("Deletando um livro, delete");
+            LOG.info("Deletando um livro - Executando LivroResource_delete");
             livroService.delete(id);
             return Response.status(Status.NO_CONTENT).build();
         } catch (Exception e) {
-            LOG.error("Erro ao deletar um livro", e);
-            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar um livro").build();
+            LOG.error("Erro ao deletar um livro - Executando LivroResource_delete", e);
+            return Response.status(Status.NOT_FOUND).entity("Erro ao deletar um livro - Executando LivroResource_delete").build();
         }
     }  
     
@@ -123,11 +123,11 @@ public class LivroResource {
     public Response upload(@PathParam("id") Long id, @MultipartForm ImageForm form) {
         try {
             fileService.salvar(id, form.getNomeImagem(), form.getImagem());
-            LOG.infof("Imagem salva com sucesso");
+            LOG.infof("Imagem salva com sucesso - Executando LivroResource_upload");
             return Response.noContent().build();
         } catch (Exception e) {
-            LOG.error("Erro ao salvar imagem do livro", e);
-            return Response.status(Status.CONFLICT).entity("Erro ao salvar imagem do livro").build();
+            LOG.error("Erro ao salvar imagem do livro - Executando LivroResource_uploar", e);
+            return Response.status(Status.CONFLICT).entity("Erro ao salvar imagem do livro - Executando LivroResource_upload").build();
         }
     }
 
@@ -140,10 +140,10 @@ public class LivroResource {
             
             ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
             response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
-            LOG.infof("Download do arquivo %s concluído com sucesso.", nomeImagem);
+            LOG.infof("Download do arquivo %s concluído com sucesso. - Executando LivroResource_download", nomeImagem);
             return response.build();
         } catch (Exception e) {
-            LOG.errorf("Erro ao realizar o download do arquivo: %s", nomeImagem, e);
+            LOG.errorf("Erro ao realizar o download do arquivo:- Executando LivroResource_download %s", nomeImagem, e);
 
             return Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
