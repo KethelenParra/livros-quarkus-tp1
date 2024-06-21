@@ -20,6 +20,10 @@ public class UsuarioRepository implements PanacheRepository<Usuario>{
         return find("cpf LIKE ?1", "%" + cpf + "%").firstResult();
     }
 
+    public Usuario findByEmailUsuario(String email){
+        return find("email LIKE ?1", "%" + email + "%").firstResult();
+    }
+
     public Usuario findById(Long id){
         return find("id", id).firstResult();
     }

@@ -40,8 +40,8 @@ public class ClienteRepository implements PanacheRepository<Cliente>{
         return find("usuario.username", username).firstResult();
     }
 
-    public Cliente findById(Long id){
-        return find("usuario.id", id).firstResult();
+    public Cliente findByIdUsuario(Long idUsuario){
+        return find("usuario.id", idUsuario).firstResult();
     }
 
 }

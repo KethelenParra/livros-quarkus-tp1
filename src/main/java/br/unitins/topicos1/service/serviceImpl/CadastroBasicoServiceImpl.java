@@ -9,6 +9,7 @@ import br.unitins.topicos1.repository.pessoa.ClienteRepository;
 import br.unitins.topicos1.repository.pessoa.UsuarioRepository;
 import br.unitins.topicos1.service.CadastroBasicoService;
 import br.unitins.topicos1.service.hash.HashService;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -31,6 +32,9 @@ public class CadastroBasicoServiceImpl implements CadastroBasicoService {
     public CadastroBasicoResponseDTO create(@Valid CadastroBasicoDTO dto) {
         Cliente cliente = new Cliente();
         Usuario usuario = new Usuario();
+        
+        validarEmailCliente(dto.email());
+
         usuario.setNome(dto.nome());
         usuario.setEmail(dto.email());
         usuario.setUsername(dto.username());
@@ -43,5 +47,13 @@ public class CadastroBasicoServiceImpl implements CadastroBasicoService {
 
         clienteRepository.persist(cliente);
         return CadastroBasicoResponseDTO.valueOf(cliente);
-    }    
+    }   
+
+    public void validarEmailCliente(String email){
+        Usuario cliente = usuarioRepository.findByEmailUsuario(email);
+        if (cliente != null) {
+            throw new ValidationException("email", "O Email: '" + email + "' já existe. - Executando ClienteServiceImpl_validarEmailCliente");
+        }
+    }
+    
 }

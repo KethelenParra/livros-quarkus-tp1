@@ -44,6 +44,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional
     public ClienteResponseDTO create(@Valid ClienteDTO dto) {
         validarCpfCliente(dto.cpf());
+        validarEmailCliente(dto.email());
 
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
@@ -75,7 +76,7 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente clienteBanco = clienteRepository.findById(id);
         
         if (clienteBanco == null) {
-            throw new ValidationException("Update cliente","Cliente não encontrado");
+            throw new ValidationException("Update cliente","Cliente não encontrado - Executando ClienteServiceImpl_update");
         }
         
         clienteBanco.setEndereco(dto.endereco());
@@ -107,7 +108,7 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente cliente = clienteRepository.findById(id);
 
         if (cliente == null) {
-            throw new NotFoundException("Cliente não encontrado");
+            throw new NotFoundException("Cliente não encontrado - Executando ClienteServiceImpl_delete");
         }
 
         clienteRepository.delete(cliente);
@@ -118,7 +119,7 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente cliente = clienteRepository.findById(id);
         
         if (cliente == null) {
-            throw new NotFoundException("Cliente não encontrado");
+            throw new NotFoundException("Cliente não encontrado - Executando ClienteServiceImpl_findById");
         }
         return ClienteResponseDTO.valueOf(cliente);
     }
@@ -142,7 +143,7 @@ public class ClienteServiceImpl implements ClienteService {
     public UsuarioResponseDTO login(String username, String senha) {
         Cliente cliente = clienteRepository.findByUsernameAndSenha(username, senha);
         if (cliente == null) {
-            throw new NullPointerException("cliente não encontrado");
+            throw new NullPointerException("cliente não encontrado - Executando ClienteServiceImpl_login");
         }
         return UsuarioResponseDTO.valueOf(cliente.getUsuario());
     }
@@ -150,7 +151,14 @@ public class ClienteServiceImpl implements ClienteService {
     public void validarCpfCliente(String cpf) {
         Usuario cliente = usuarioRepository.findByCpfUsuario(cpf);
         if (cliente != null) {
-            throw new ValidationException("cpf", "O CPF: '" + cpf + "' já existe.");
+            throw new ValidationException("cpf", "O CPF: '" + cpf + "' já existe. - Executando ClienteServiceImpl_validarCpfCliente");
+        }
+    }
+
+    public void validarEmailCliente(String email){
+        Usuario cliente = usuarioRepository.findByEmailUsuario(email);
+        if (cliente != null) {
+            throw new ValidationException("email", "O Email: '" + email + "' já existe. - Executando ClienteServiceImpl_validarEmailCliente");
         }
     }
 
@@ -159,10 +167,10 @@ public class ClienteServiceImpl implements ClienteService {
     public void alterarSenha(AlterarSenhaDTO dto) {
         Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
 
-        Cliente cliente = clienteRepository.findById(usuario.getId());
+        Cliente cliente = clienteRepository.findByIdUsuario(usuario.getId());
 
         if(cliente == null || !hashService.verificandoHash(dto.senhaAntiga(), cliente.getUsuario().getSenha())){
-            throw new ValidationException("senhaAntiga", "Senha antiga não confere");
+            throw new ValidationException("senhaAntiga", "Senha antiga não confere - Executando ClienteServiceImpl_alterarSenha");
         }
 
         cliente.getUsuario().setSenha(hashService.getHashSenha(dto.novaSenha()));
@@ -175,10 +183,10 @@ public class ClienteServiceImpl implements ClienteService {
         
         Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
 
-        Cliente cliente = clienteRepository.findById(usuario.getId());
+        Cliente cliente = clienteRepository.findByIdUsuario(usuario.getId());
 
         if (cliente == null || !hashService.verificandoHash(dto.senha(), cliente.getUsuario().getSenha())) {
-            throw new ValidationException("senhaAntiga", "Senha incorreta");
+            throw new ValidationException("senhaAntiga", "Senha incorreta - Executando ClienteServiceImpl_alterarUsername");
         }
 
         cliente.getUsuario().setUsername(dto.usernameNovo());
@@ -190,10 +198,10 @@ public class ClienteServiceImpl implements ClienteService {
     public void alterarEmail(AlterarEmailDTO dto) {
         Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
 
-        Cliente cliente = clienteRepository.findById(usuario.getId());
+        Cliente cliente = clienteRepository.findByIdUsuario(usuario.getId());
 
         if (cliente == null || !hashService.verificandoHash(dto.senha(), cliente.getUsuario().getSenha())) {
-            throw new ValidationException("senhaAntiga", "Senha incorreta");
+            throw new ValidationException("senhaAntiga", "Senha incorreta - Executando ClienteServiceImpl_alterarEmail");
         }
 
         cliente.getUsuario().setEmail(dto.emailNovo());
@@ -205,10 +213,10 @@ public class ClienteServiceImpl implements ClienteService {
     public ClienteResponseDTO findMeuPerfil() {
         Usuario usuario = usuarioRepository.findById(Long.valueOf(tokenJwt.getClaim("id").toString()));
 
-        Cliente cliente = clienteRepository.findById(usuario.getId());
+        Cliente cliente = clienteRepository.findByIdUsuario(usuario.getId());
 
         if (cliente == null) {
-            throw new ValidationException("Perfil","Cliente não encontrado");
+            throw new ValidationException("Perfil","Cliente não encontrado - Executando ClienteServiceImpl_findMeuPerfil");
         }
         return ClienteResponseDTO.valueOf(cliente);
     }
