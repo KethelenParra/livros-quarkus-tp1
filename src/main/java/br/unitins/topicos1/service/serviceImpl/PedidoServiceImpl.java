@@ -74,7 +74,12 @@ public class PedidoServiceImpl implements PedidoService {
                 
         if (!clienteAutenticado(username, dto.idCliente())) {
             throw new ValidationException("Verificando...", "Você não tem autorização para realizar o pedido. - Executando PedidoServiceImpl_create");
-        }       
+        }     
+        
+        Pedido pedidoExistente = pedidoRepository.findByClienteNaoFinalizado(cliente);
+        if(pedidoExistente != null){
+            throw new ValidationException("Buscando Pedido", "Já existe um pedido em aberto. Pague seu ultimo pedido ou delete para fazer um novo. - Executando PedidoServiceImpl_create");
+        }
 
         Pedido pedido = new Pedido();
                 
