@@ -78,7 +78,7 @@ public class PedidoResourceTest {
     public void cancelarPedidoTest() {
         PedidoResponseDTO response = pedidoService.create(new PedidoDTO(
             1L,
-            Arrays.asList(new ItemPedidoDTO(2L, 4))
+            Arrays.asList(new ItemPedidoDTO(3L, 4))
         ));
         
         given()
